@@ -1,7 +1,8 @@
 (ns tabber.core
-  (:require [reagent.core :as reagent :refer [atom]]))
-
-(defonce app-state (atom {:e6 0 :a 3 :d 2 :g 0 :b 1 :e 0}))
+  (:require [reagent.core :as reagent :refer [atom]]
+            [clojure.string :as str]))
+  
+(defonce app-state (atom {:e6 0 :a 3 :d 2 :g 0 :b 1 :e 0 :name "C"}))
 
 (defn fretX [str]
   (cond 
@@ -15,52 +16,67 @@
 
 (defn fretY [fret]
   (cond 
-    (= 0 fret) "-25px" 
-    (= 1 fret) "15px"
-    (= 2 fret) "65px"
-      :else "115px"))
+    (= 0 (js/parseInt fret)) "-25px" 
+    (= 1 (js/parseInt fret)) "15px"
+    (= 2 (js/parseInt fret)) "65px"
+    (= 3 (js/parseInt fret)) "115px"
+      :else "-25px"))
 
-(defn FretMarker [str]
+(defn FretFingerMarker [string]
   [:div {:style 
           { :position "fixed" 
-            :top (fretX str) 
-            :right (fretY (str @app-state)) 
+            :top (fretX string) 
+            :right (fretY (string @app-state)) 
             :height "20px"
             :width "20px"
             :textAlign "center" 
             :border "1px solid #ccc" 
             :borderRadius "10px" 
-            :backgroundColor "#eee"}} (str @app-state)])
+            :backgroundColor "#ddd"}} (string @app-state)])
 
-(defn Strings []
+(defn HorizontalStrings []
   [:div
     [:hr {:style {:borderBottom "1px solid #ccc" :marginTop "30px"}}]
     [:hr {:style {:borderBottom "1px solid #ccc" :marginTop "28px"}}]
     [:hr {:style {:borderBottom "1px solid #ccc" :marginTop "28px"}}]
     [:hr {:style {:borderBottom "1px solid #ccc" :marginTop "28px"}}]])
 
-(defn FretLine [Yoffset]
+(defn VerticalFretLine [Yoffset]
   [:div {:style {:position "absolute" :top "0" :left Yoffset :height "150px" :width "50px" :borderLeft "1px solid #ccc"}}])
 
-(defn ChordInput [val]
+(defn ParseAndAssignNotes [noteString]
+  (let [[e6 a d g b e name] (str/split noteString " ")]
+    (if (not(= nil e6)) (swap! app-state assoc-in [:e6] e6))
+    (if (not(= nil a)) (swap! app-state assoc-in [:a] a))
+    (if (not(= nil d)) (swap! app-state assoc-in [:d] d))
+    (if (not(= nil g)) (swap! app-state assoc-in [:g] g))
+    (if (not(= nil b)) (swap! app-state assoc-in [:b] b))
+    (if (not(= nil e)) (swap! app-state assoc-in [:e] e))
+    (if (not(= nil name)) (swap! app-state assoc-in [:name] name))))
+
+(defn ChordInput []
   [:input {:type "text"
-           :on-change (fn [e] (swap! app-state assoc-in val (.-target.value e)))}])
+           :placeholder "Enter New Chord"
+           :on-input (fn [e] (ParseAndAssignNotes (.-target.value e)))
+           :style{:marginTop "300px"}}])
 
 (defn ChordChart [size]
-  [:div {:style {:posiiton "relative" :width "150px" :height "150px" :border "1px solid #ccc" :transform size}}
-    [Strings]
-    [FretLine "50px"]
-    [FretLine "100px"]
-    [FretMarker :e6]
-    [FretMarker :a]
-    [FretMarker :d]
-    [FretMarker :g]
-    [FretMarker :b]
-    [FretMarker :e]])
+  [:div {:style {:posiiton "relative" :width "150px" :height "150px" :border "1px solid #ccc" :transform size :backgroundColor "#fff"}}
+    [:div {:style {:position "fixed" :top "-50px"  :fontSize "30px"}} (:name @app-state)]
+    [HorizontalStrings]
+    [VerticalFretLine "50px"]
+    [VerticalFretLine "100px"]
+    [FretFingerMarker :e6]
+    [FretFingerMarker :a]
+    [FretFingerMarker :d]
+    [FretFingerMarker :g]
+    [FretFingerMarker :b]
+    [FretFingerMarker :e]])
 
 (defn chords []
-  [:div {:style{:display "flex" :justifyContent "center" :marginTop "200px"}}
-    [ ChordChart "scale(2,2)"]])
+  [:div {:style{:display "flex" :justifyContent "center" :marginTop "300px"}}
+    [ ChordChart "scale(2,2)"]
+    [ChordInput]])
       
 (reagent/render-component [chords]
                           (. js/document (getElementById "app")))
