@@ -2,16 +2,16 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [clojure.string :as str]))
   
-(defonce app-state (atom {:e6 0 :a 3 :d 2 :g 0 :b 1 :e 0 :name "C"}))
+(defonce app-state (atom {:e6 "00" :a "33" :d "22" :g "00" :b "11" :e "00" :name "C"}))
 
-(defn fretX [str]
+(defn fretX [string]
   (cond 
-    (= :e6 str) "-10px"
-    (= :a str) "20px"
-    (= :d str) "50px"
-    (= :g str) "80px"
-    (= :b str) "110px"
-    (= :e str) "140px"
+    (= :e6 string) "-10px"
+    (= :a string) "20px"
+    (= :d string) "50px"
+    (= :g string) "80px"
+    (= :b string) "110px"
+    (= :e string) "140px"
       :else "0"))
 
 (defn fretY [fret]
@@ -20,19 +20,21 @@
     (= 1 (js/parseInt fret)) "15px"
     (= 2 (js/parseInt fret)) "65px"
     (= 3 (js/parseInt fret)) "115px"
+    (= 4 (js/parseInt fret)) "165px"
       :else "-25px"))
 
 (defn FretFingerMarker [string]
-  [:div {:style 
-          { :position "fixed" 
-            :top (fretX string) 
-            :right (fretY (string @app-state)) 
-            :height "20px"
-            :width "20px"
-            :textAlign "center" 
-            :border "1px solid #ccc" 
-            :borderRadius "10px" 
-            :backgroundColor "#ddd"}} (string @app-state)])
+  (let [[fret finger] (string @app-state)]
+   [:div {:style 
+           { :position "fixed" 
+             :top (fretX string) 
+             :right (fretY fret) 
+             :height "20px"
+             :width "20px"
+             :textAlign "center" 
+             :border "1px solid #ccc" 
+             :borderRadius "10px" 
+             :backgroundColor "#ddd"}} finger]))
 
 (defn HorizontalStrings []
   [:div
@@ -58,14 +60,15 @@
   [:input {:type "text"
            :placeholder "Enter New Chord"
            :on-input (fn [e] (ParseAndAssignNotes (.-target.value e)))
-           :style{:marginTop "300px"}}])
+           :style{:marginTop "120px" :width "200px"}}])
 
 (defn ChordChart [size]
-  [:div {:style {:posiiton "relative" :width "150px" :height "150px" :border "1px solid #ccc" :transform size :backgroundColor "#fff"}}
+  [:div {:style {:posiiton "relative" :width "200px" :height "150px" :border "1px solid #ccc" :transform size :backgroundColor "#fff"}}
     [:div {:style {:position "fixed" :top "-50px"  :fontSize "30px"}} (:name @app-state)]
     [HorizontalStrings]
     [VerticalFretLine "50px"]
     [VerticalFretLine "100px"]
+    [VerticalFretLine "150px"]
     [FretFingerMarker :e6]
     [FretFingerMarker :a]
     [FretFingerMarker :d]
@@ -74,9 +77,10 @@
     [FretFingerMarker :e]])
 
 (defn chords []
-  [:div {:style{:display "flex" :justifyContent "center" :marginTop "300px"}}
+  [:div {:style{:display "flex" :flexDirection "column" :alignItems "center" :justifyContent "center" :marginTop "300px"}}
     [ ChordChart "scale(2,2)"]
-    [ChordInput]])
+    [ChordInput]
+    [:span "Enter chords as FRET/Finger FRET/Finger ... NAME. So G would be 32 21 00 00 33 34 G"]])
       
 (reagent/render-component [chords]
                           (. js/document (getElementById "app")))
