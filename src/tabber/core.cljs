@@ -1,35 +1,10 @@
 (ns tabber.core
   (:require [reagent.core :as reagent :refer [atom]]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [tabber.chords :as chords]))
   
 (enable-console-print!)
-(defonce app-state (atom {:chords [ 
-  [32 21 00 00 33 34 "G"] 
-  [32 21 00 00 33 34 "G"] 
-  ["xx" 33 22 00 11 00 "C"] 
-  ["xx" 33 34 22 11 00 "F"]
-  ["xx" 33 22 00 11 00 "C"] 
-  [32 21 00 00 33 34 "G"] 
-  [32 21 00 00 33 34 "G"] 
-  [32 21 00 00 33 34 "G"] 
-  [32 21 00 00 33 34 "G"] 
-  [32 21 00 00 33 34 "G"] 
-  ["xx" 33 22 00 11 00 "C"] 
-  ["xx" 33 34 22 11 00 "F"]
-  ["xx" 33 22 00 11 00 "C"] 
-  [32 21 00 00 33 34 "G"] 
-  ["xx" 33 22 00 11 00 "C"] 
-  ["xx" 33 34 22 11 00 "F"]
-  ["xx" 33 22 00 11 00 "C"] 
-  [32 21 00 00 33 34 "G"] 
-  ["xx" 33 22 00 11 00 "C"] 
-  ["xx" 33 34 22 11 00 "F"]
-  ["xx" 33 22 00 11 00 "C"] 
-  [32 21 00 00 33 34 "G"] 
-  ["xx" 33 22 00 11 00 "C"] 
-  ["xx" 33 34 22 11 00 "F"]
-  ["xx" 33 22 00 11 00 "C"] 
-  ["xx" 33 34 22 11 00 "F"]]}))
+(defonce app-state (atom {:chords chords/chordList}))
 
 ; Symbol -> String
 (defn fretX [string]
@@ -53,7 +28,14 @@
     (= "3" fret) "115px"
     (= "4" fret) "165px"
       :else "-25px"))
-      
+    
+(defn fingerColor [finger]
+  (cond
+    (= "1" finger) "red" 
+    (= "2" finger) "orange" 
+    (= "3" finger) "lightBlue" 
+    (= "4" finger) "pink"
+     :else "#ddd")) 
 ; Symbol -> Int -> Html
 (defn FretFingerMarker [string notes]
   (let [[fret finger] (str notes 0)]
@@ -66,7 +48,7 @@
              :textAlign "center" 
              :border "1px solid #ccc" 
              :borderRadius "10px" 
-             :backgroundColor "#ddd"}} finger]))
+             :backgroundColor (fingerColor finger)}} finger]))
 
 ; Html
 (defn HorizontalStrings []
@@ -81,7 +63,7 @@
 
 ; String -> Html
 (defn ChordChart [chord]
-  (let [[e6 a d g b e chordName] chord]
+  (let [[e6 a d g b e chordName bar] chord]
     [:div {:style {:position "relative" :width "200px" :height "150px" :border "1px solid #ccc"  :backgroundColor "#fff" :margin "50px"}}
       [:div {:style {:position "absolute" :top "-50px"  :fontSize "30px"}} (str chordName)]
       [HorizontalStrings]
@@ -93,7 +75,8 @@
       [FretFingerMarker :d d]
       [FretFingerMarker :g g]
       [FretFingerMarker :b b]
-      [FretFingerMarker :e e]]))
+      [FretFingerMarker :e e]
+      [:div {:style {:position "absolute" :bottom "-20px" :right "0" :fontSize "15px"}} (if (not(= nil bar )) (str "bar " bar) "")]]))
 
 (defn chords []
   [:div {:style{:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "200px"}}
