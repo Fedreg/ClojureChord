@@ -4,7 +4,7 @@
             [tabber.chords :as chords]))
   
 (enable-console-print!)
-(defonce app-state (atom {:chords chords/chordList :key "C"}))
+(defonce app-state (atom {:chords chords/chordList :key "A"}))
 
 ; Symbol -> String
 (defn fretX [string]
@@ -61,7 +61,7 @@
 
 ; String -> Html
 (defn ChordChart [chord]
-  (let [[e6 a d g b e chordName bar] chord]
+  (let [[chordName e6 a d g b e bar] chord]
     [:div {:style {:position "relative" :width "200px" :height "150px" :border "1px solid #ccc"  :backgroundColor "#fff" :margin "50px"}}
       [:div {:style {:position "absolute" :top "-50px"  :fontSize "30px"} } (str chordName)]
       [HorizontalStrings]
@@ -74,22 +74,31 @@
       [FretFingerMarker :g g]
       [FretFingerMarker :b b]
       [FretFingerMarker :e e]
-      [:div {:style {:position "absolute" :bottom "-20px" :right "0" :fontSize "15px"}} (if (not(= nil bar )) (str "bar " bar) "")]]))
+      [:div {:style {:position "absolute" :bottom "-30px" :right "0" :fontSize "15px"}} (if (not(= nil bar )) (str "bar " bar) "")]]))
 
 (defn KeyButton [key]
-  [:button {:style {:width "40px" :height "30px" :margin "5px 20px" :fontSize "20px" :padding "5px"} :on-click (fn [e] (swap! app-state assoc-in [:key] key))} key])
+  [:button {:style {:width "40px" 
+                    :height "35px" 
+                    :margin "5px 20px"
+                    :fontSize "20px"
+                    :padding "5px"
+                    :border "1px solid #777"
+                    :backgroundColor (if (= key (:key @app-state)) "lightBlue" "rgba(0,0,0,0)")} 
+            :on-click (fn [e] (swap! app-state assoc-in [:key] key))} key])
 
 (def keyList
-  ["A" "B" "C" "D" "E" "F" "G"])
+  ["All" "A" "B" "C" "D" "E" "F" "G"])
 
 (defn KeyFilter [collection]
-  (filter (= (last (:chords @app-state)) (:key @app-state)) collection ))
+  (let [key (:key @app-state)]
+    (if (= key "All") 
+      collection
+      (filter #(= (first (first %)) (:key @app-state)) collection))))
   
 (defn chords []
   [:div {:style{ :marginTop "100px" :textAlign "center"}}
-    [:div (:key @app-state)]
     (map KeyButton keyList)
-    [:div {:style{:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "50px"}}
+    [:div {:style{:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "50px" :transition "all 0.3s ease"}}
       (map ChordChart (KeyFilter (:chords @app-state)))]])
       
 (reagent/render-component [chords]
