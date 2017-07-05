@@ -47,6 +47,7 @@
              :borderRadius "10px"
              :fontSize "14px"
              :transition "all 0.3s ease"
+             :boxShadow "5px 5px 10px rgba(0,0,0,0.3)"
              :backgroundColor (fingerColor finger)}} finger]))
 
 ; Html
@@ -93,6 +94,7 @@
                     :padding "5px"
                     :border "1px solid #555"
                     :color "#fff"
+                    :cursor "pointer"
                     :backgroundColor (if (= key (:key @app-state)) "#e8175d" "rgba(0,0,0,0)")} 
             :on-click (fn [e] (swap! app-state assoc-in [:key] key))} key])
 
@@ -103,7 +105,7 @@
   (let [key (:key @app-state)]
     (if (= key "All") 
       collection
-      (filter #(= (first (first %)) (:key @app-state)) collection))))
+      (filter #(= (first (first %)) key) collection))))
   
 (defn chords []
   [:div {:style{ :marginTop "100px" :textAlign "center"}}
