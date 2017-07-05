@@ -4,11 +4,10 @@
             [tabber.chords :as chords]))
   
 (enable-console-print!)
-(defonce app-state (atom {:chords chords/chordList}))
+(defonce app-state (atom {:chords chords/chordList :key "C"}))
 
 ; Symbol -> String
 (defn fretX [string]
-  (print "fretX: " string)
   (cond 
     (= :e6 string) "-10px"
     (= :a string) "20px"
@@ -20,7 +19,6 @@
 
 ; String -> String
 (defn fretY [fret]
-  (print "fretY: " fret)
   (cond 
     (= "0" fret) "-25px" 
     (= "1" fret) "15px"
@@ -65,7 +63,7 @@
 (defn ChordChart [chord]
   (let [[e6 a d g b e chordName bar] chord]
     [:div {:style {:position "relative" :width "200px" :height "150px" :border "1px solid #ccc"  :backgroundColor "#fff" :margin "50px"}}
-      [:div {:style {:position "absolute" :top "-50px"  :fontSize "30px"}} (str chordName)]
+      [:div {:style {:position "absolute" :top "-50px"  :fontSize "30px"} } (str chordName)]
       [HorizontalStrings]
       [VerticalFretLine "50px"]
       [VerticalFretLine "100px"]
@@ -78,9 +76,21 @@
       [FretFingerMarker :e e]
       [:div {:style {:position "absolute" :bottom "-20px" :right "0" :fontSize "15px"}} (if (not(= nil bar )) (str "bar " bar) "")]]))
 
+(defn KeyButton [key]
+  [:button {:style {:width "40px" :height "30px" :margin "5px 20px" :fontSize "20px" :padding "5px"} :on-click (fn [e] (swap! app-state assoc-in [:key] key))} key])
+
+(def keyList
+  ["A" "B" "C" "D" "E" "F" "G"])
+
+(defn KeyFilter [collection]
+  (filter (= (last (:chords @app-state)) (:key @app-state)) collection ))
+  
 (defn chords []
-  [:div {:style{:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "200px"}}
-    (map ChordChart (:chords @app-state))])
+  [:div {:style{ :marginTop "100px" :textAlign "center"}}
+    [:div (:key @app-state)]
+    (map KeyButton keyList)
+    [:div {:style{:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "50px"}}
+      (map ChordChart (KeyFilter (:chords @app-state)))]])
       
 (reagent/render-component [chords]
                           (. js/document (getElementById "app")))
