@@ -58,5 +58,8 @@ goog.addDependency("../reagent/dom/server.js", ['reagent.dom.server'], ['reagent
 goog.addDependency("../react-dom.inc.js", ['cljsjs.react.dom'], ['cljsjs.react']);
 goog.addDependency("../reagent/dom.js", ['reagent.dom'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'cljsjs.react.dom', 'reagent.debug']);
 goog.addDependency("../reagent/core.js", ['reagent.core'], ['reagent.impl.util', 'reagent.dom.server', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug', 'reagent.dom']);
-goog.addDependency("../tabber/core.js", ['tabber.core'], ['tabber.chords', 'reagent.core', 'cljs.core', 'clojure.string']);
+goog.addDependency("../tabber/state.js", ['tabber.state'], ['tabber.chords', 'reagent.core', 'cljs.core']);
+goog.addDependency("../tabber/colorThemes.js", ['tabber.colorThemes'], ['cljs.core', 'tabber.state']);
+goog.addDependency("../tabber/modal.js", ['tabber.modal'], ['tabber.colorThemes', 'cljs.core', 'tabber.state']);
+goog.addDependency("../tabber/core.js", ['tabber.core'], ['tabber.chords', 'tabber.colorThemes', 'reagent.core', 'cljs.core', 'tabber.state', 'tabber.modal', 'clojure.string']);
 goog.addDependency("../figwheel/connect/build_dev.js", ['figwheel.connect.build_dev'], ['cljs.core', 'figwheel.client', 'tabber.core', 'figwheel.client.utils']);
