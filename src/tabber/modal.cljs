@@ -14,9 +14,9 @@
                     :transition "all 0.3s ease"
                     :cursor "pointer"}
             :on-click #(swap! state/app-state assoc-in [:showModal] (not (:showModal @state/app-state)))}
-        [:hr {:style { :height "1px" :backgroundColor "#fff" :border "none" :marginTop "6px"}}]
-        [:hr {:style { :height "1px" :backgroundColor "#fff" :border "none" :marginTop "6px"}}]
-        [:hr {:style { :height "1px" :backgroundColor "#fff" :border "none" :marginTop "6px"}}]])
+        [:hr {:style { :height "1px" :backgroundColor (color/ReturnColors :t1) :border "none" :marginTop "6px"}}]
+        [:hr {:style { :height "1px" :backgroundColor (color/ReturnColors :t1) :border "none" :marginTop "6px"}}]
+        [:hr {:style { :height "1px" :backgroundColor (color/ReturnColors :t1) :border "none" :marginTop "6px"}}]])
 
 (defn ThemeSelect []
     [:select {:style {:width "200px" 

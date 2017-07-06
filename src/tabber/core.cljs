@@ -11,7 +11,6 @@
 (set! js/document.body.style.backgroundColor (color/ReturnColors :bcgrnd))
 ; Sets body color.  Temporary until more permanent stylesheet is created.
 (defn ChangeBackgroundColor []
-	(:colors @state/app-state)
 	(set! js/document.body.style.backgroundColor (color/ReturnColors :bcgrnd)))
  
 ; Symbol -> String
@@ -37,6 +36,7 @@
 
 ; String -> String
 (defn fingerColor [finger]
+	(ChangeBackgroundColor)
 	(cond
 		(= "1" finger) (color/ReturnColors :f1) 
 		(= "2" finger) (color/ReturnColors :f2)
@@ -105,7 +105,7 @@
 						:fontSize "20px"
 						:padding "5px"
 						:border "1px solid #555"
-						:color (get-in @state/app-state [:colors :t1])
+						:color (color/ReturnColors :t1)
 						:cursor "pointer"
 						:backgroundColor (if (= key (:key @state/app-state)) (color/ReturnColors :f1) "rgba(0,0,0,0)")} 
 				:on-click (fn [e] (swap! state/app-state assoc-in [:key] key))} key])
@@ -123,7 +123,6 @@
 	[:div {:style{ :marginTop "100px" :textAlign "center"}}
 		[modal/ModalIcon]
 		[modal/Modal]
-		[:div str (:colors @state/app-state)]
 		(map KeyButton keyList)
 		[:div {:style{:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "50px"}}
 			(map ChordChart (KeyFilter (:chords @state/app-state)))]])
