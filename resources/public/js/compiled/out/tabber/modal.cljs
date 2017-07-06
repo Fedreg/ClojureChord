@@ -44,7 +44,7 @@
                         :transition "all 0.3s ease"
                         :color "#fff"
                         :backgroundColor "#222"}}
-        [:div "Select Theme (Not operational yet!)"]
+        [:div "Select Theme"]
         [ThemeSelect]])
         
         
