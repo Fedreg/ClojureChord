@@ -9,7 +9,7 @@
                     :top "25px"
                     :right "25px"
                     :width "20px"
-                    :transform (if (= true (:showModal @state/app-state)) "translateX(-320px) rotate(90deg)" "translateX(0) rotate(0)")
+                    :transform (if (= true (:showModal @state/app-state)) "translateX(-320px) rotate(270deg)" "translateX(0) rotate(0)")
                     :zIndex 1001
                     :transition "all 0.3s ease"
                     :cursor "pointer"}
@@ -42,11 +42,9 @@
                         :paddingTop "75px"
                         :zIndex "1000"
                         :transition "all 0.3s ease"
-                        :color "#fff"
-                        :backgroundColor "#222"}}
-        [:div "Select Theme (Not operational yet!)"]
+                        :color (color/ReturnColors :t1) 
+                        :backgroundColor (color/ReturnColors :menu)}}
+        [:div "Select Theme"]
         [ThemeSelect]])
-        
-        
 
 
