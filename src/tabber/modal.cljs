@@ -2,8 +2,6 @@
     (:require [tabber.state :as state]
               [tabber.colorThemes :as color]))
 
-(enable-console-print!)
-(print color/light)
 (defn ModalIcon []
     [:div {:style {:position "fixed"
                     :top "25px"
@@ -18,6 +16,7 @@
         [:hr {:style { :height "1px" :backgroundColor (color/ReturnColors :t1) :border "none" :marginTop "6px"}}]
         [:hr {:style { :height "1px" :backgroundColor (color/ReturnColors :t1) :border "none" :marginTop "6px"}}]])
 
+; Select menu for theme
 (defn ThemeSelect []
     [:select {:style {:width "200px" 
                         :height "25px" 
@@ -28,10 +27,11 @@
                         :-webkitAppearance "none" 
                         :border "1px solid #fff"}
                 :on-change #(swap! state/app-state assoc-in [:colors] (-> % .-target .-value))}
-        [:option {:value "grey"} "Grey"]
         [:option {:value "light"} "Light"]
+        [:option {:value "grey"} "Grey"]
         [:option {:value "dark"} "Dark"]])
 
+; Draws the nav menu that opens up from the side.  (Was originally a modal, hence the name.)
 (defn Modal [] 
     [:div {:style {:position "fixed"
                         :top "0"

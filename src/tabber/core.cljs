@@ -8,7 +8,7 @@
 
 
 (enable-console-print!)
-(set! js/document.body.style.backgroundColor (color/ReturnColors :bcgrnd))
+
 ; Sets body color.  Temporary until more permanent stylesheet is created.
 (defn ChangeBackgroundColor []
 	(set! js/document.body.style.backgroundColor (color/ReturnColors :bcgrnd)))
@@ -44,7 +44,6 @@
 		(= "4" finger) (color/ReturnColors :f4)
 			:else (color/ReturnColors :fx)))
 
-
 ; Symbol -> Int -> Html
 (defn FretFingerMarker [string notes]
 	(let [[fret finger] (str notes 0)]
@@ -73,16 +72,16 @@
 	[:div {:style {:position "absolute" :top "0" :left Yoffset :height "150px" :width "50px" :borderLeft "1px solid #333"}}])
 
 (defn Nut []
-	[:div {:style {:position "absolute" :top "-1px" :right "-5px" :width "5px" :height "152px" :backgroundColor "#000"}}])
+	[:div {:style {:position "absolute" :top "-1px" :right "-5px" :width "5px" :height "152px" :backgroundColor (color/ReturnColors :t2)}}])
 
 ; String -> Html
 (defn ChordChart [chord]
 	(let [[chordName e6 a d g b e bar] chord]
-		[:div {:style {:position "relative" 
-					:width "200px" 
-					:height "150px" 
-					:border "1px solid #000"  
-					:backgroundColor (color/ReturnColors :chart) 
+		[:div {:style {:position "relative"
+					:width "200px"
+					:height "150px"
+					:border (str "1px solid " (color/ReturnColors :t2))
+					:backgroundColor (color/ReturnColors :chart)
 					:margin "50px"}}
 		[:div {:style {:position "absolute" :top "-50px"  :fontSize "30px" :color (color/ReturnColors :t1)} } (str chordName)]
 		[HorizontalStrings]
