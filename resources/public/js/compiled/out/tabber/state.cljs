@@ -6,6 +6,6 @@
                             :key "A" 
                             :quality "All"
                             :showModal false
-                            :colors "light"}))
+                            :colors "dark"}))
 
 
