@@ -14,10 +14,10 @@ var i = (0);
 while(true){
 if((i < len)){
 var k = (ks[i]);
-var G__29625 = cljs.core.assoc.call(null,m,cljs.core.keyword.call(null,k),(o[k]));
-var G__29626 = (i + (1));
-m = G__29625;
-i = G__29626;
+var G__51723 = cljs.core.assoc.call(null,m,cljs.core.keyword.call(null,k),(o[k]));
+var G__51724 = (i + (1));
+m = G__51723;
+i = G__51724;
 continue;
 } else {
 return m;
@@ -75,22 +75,22 @@ return reagent.impl.component.extract_children.call(null,v);
 }
 });
 reagent.impl.component.reagent_class_QMARK_ = (function reagent$impl$component$reagent_class_QMARK_(c){
-return (cljs.core.fn_QMARK_.call(null,c)) && (cljs.core.some_QMARK_.call(null,(function (){var G__29630 = c;
-var G__29630__$1 = (((G__29630 == null))?null:G__29630.prototype);
-if((G__29630__$1 == null)){
+return (cljs.core.fn_QMARK_.call(null,c)) && (cljs.core.some_QMARK_.call(null,(function (){var G__51728 = c;
+var G__51728__$1 = (((G__51728 == null))?null:G__51728.prototype);
+if((G__51728__$1 == null)){
 return null;
 } else {
-return (G__29630__$1["reagentRender"]);
+return (G__51728__$1["reagentRender"]);
 }
 })()));
 });
 reagent.impl.component.react_class_QMARK_ = (function reagent$impl$component$react_class_QMARK_(c){
-return (cljs.core.fn_QMARK_.call(null,c)) && (cljs.core.some_QMARK_.call(null,(function (){var G__29634 = c;
-var G__29634__$1 = (((G__29634 == null))?null:G__29634.prototype);
-if((G__29634__$1 == null)){
+return (cljs.core.fn_QMARK_.call(null,c)) && (cljs.core.some_QMARK_.call(null,(function (){var G__51732 = c;
+var G__51732__$1 = (((G__51732 == null))?null:G__51732.prototype);
+if((G__51732__$1 == null)){
 return null;
 } else {
-return (G__29634__$1["render"]);
+return (G__51732__$1["render"]);
 }
 })()));
 });
@@ -121,8 +121,8 @@ var f = (c["reagentRender"]);
 var _ = ((cljs.core.ifn_QMARK_.call(null,f))?null:(function(){throw (new Error("Assert failed: (ifn? f)"))})());
 var res = (((c["cljsLegacyRender"]) === true)?f.call(c,c):(function (){var v = reagent.impl.component.get_argv.call(null,c);
 var n = cljs.core.count.call(null,v);
-var G__29636 = n;
-switch (G__29636) {
+var G__51734 = n;
+switch (G__51734) {
 case (1):
 return f.call(c);
 
@@ -154,31 +154,31 @@ return reagent.impl.component.as_element.call(null,res);
 if(cljs.core.ifn_QMARK_.call(null,res)){
 var f__$1 = ((reagent.impl.component.reagent_class_QMARK_.call(null,res))?((function (c,f,_,res){
 return (function() { 
-var G__29638__delegate = function (args){
+var G__51736__delegate = function (args){
 return reagent.impl.component.as_element.call(null,cljs.core.apply.call(null,cljs.core.vector,res,args));
 };
-var G__29638 = function (var_args){
+var G__51736 = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__29639__i = 0, G__29639__a = new Array(arguments.length -  0);
-while (G__29639__i < G__29639__a.length) {G__29639__a[G__29639__i] = arguments[G__29639__i + 0]; ++G__29639__i;}
-  args = new cljs.core.IndexedSeq(G__29639__a,0);
+var G__51737__i = 0, G__51737__a = new Array(arguments.length -  0);
+while (G__51737__i < G__51737__a.length) {G__51737__a[G__51737__i] = arguments[G__51737__i + 0]; ++G__51737__i;}
+  args = new cljs.core.IndexedSeq(G__51737__a,0);
 } 
-return G__29638__delegate.call(this,args);};
-G__29638.cljs$lang$maxFixedArity = 0;
-G__29638.cljs$lang$applyTo = (function (arglist__29640){
-var args = cljs.core.seq(arglist__29640);
-return G__29638__delegate(args);
+return G__51736__delegate.call(this,args);};
+G__51736.cljs$lang$maxFixedArity = 0;
+G__51736.cljs$lang$applyTo = (function (arglist__51738){
+var args = cljs.core.seq(arglist__51738);
+return G__51736__delegate(args);
 });
-G__29638.cljs$core$IFn$_invoke$arity$variadic = G__29638__delegate;
-return G__29638;
+G__51736.cljs$core$IFn$_invoke$arity$variadic = G__51736__delegate;
+return G__51736;
 })()
 ;})(c,f,_,res))
 :res);
 (c["reagentRender"] = f__$1);
 
-var G__29641 = c;
-c = G__29641;
+var G__51739 = c;
+c = G__51739;
 continue;
 } else {
 return res;
@@ -189,7 +189,7 @@ break;
 }
 });
 reagent.impl.component.do_render = (function reagent$impl$component$do_render(c){
-var _STAR_current_component_STAR_29643 = reagent.impl.component._STAR_current_component_STAR_;
+var _STAR_current_component_STAR_51741 = reagent.impl.component._STAR_current_component_STAR_;
 reagent.impl.component._STAR_current_component_STAR_ = c;
 
 try{var ok = [false];
@@ -205,7 +205,7 @@ if(cljs.core.truth_(reagent.debug.has_console)){
 }
 }
 }
-}finally {reagent.impl.component._STAR_current_component_STAR_ = _STAR_current_component_STAR_29643;
+}finally {reagent.impl.component._STAR_current_component_STAR_ = _STAR_current_component_STAR_51741;
 }});
 reagent.impl.component.rat_opts = new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"no-cache","no-cache",1588056370),true], null);
 reagent.impl.component.static_fns = new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"render","render",-1408033454),(function reagent$impl$component$render(){
@@ -228,33 +228,33 @@ return rat._run(false);
 }
 })], null);
 reagent.impl.component.custom_wrapper = (function reagent$impl$component$custom_wrapper(key,f){
-var G__29647 = (((key instanceof cljs.core.Keyword))?key.fqn:null);
-switch (G__29647) {
+var G__51745 = (((key instanceof cljs.core.Keyword))?key.fqn:null);
+switch (G__51745) {
 case "getDefaultProps":
 throw (new Error([cljs.core.str("Assert failed: "),cljs.core.str("getDefaultProps not supported"),cljs.core.str("\n"),cljs.core.str("false")].join('')));
 
 
 break;
 case "getInitialState":
-return ((function (G__29647){
+return ((function (G__51745){
 return (function reagent$impl$component$custom_wrapper_$_getInitialState(){
 var c = this;
 return cljs.core.reset_BANG_.call(null,reagent.impl.component.state_atom.call(null,c),f.call(c,c));
 });
-;})(G__29647))
+;})(G__51745))
 
 break;
 case "componentWillReceiveProps":
-return ((function (G__29647){
+return ((function (G__51745){
 return (function reagent$impl$component$custom_wrapper_$_componentWillReceiveProps(nextprops){
 var c = this;
 return f.call(c,c,reagent.impl.component.props_argv.call(null,c,nextprops));
 });
-;})(G__29647))
+;})(G__51745))
 
 break;
 case "shouldComponentUpdate":
-return ((function (G__29647){
+return ((function (G__51745){
 return (function reagent$impl$component$custom_wrapper_$_shouldComponentUpdate(nextprops,nextstate){
 var or__25979__auto__ = reagent.impl.util._STAR_always_update_STAR_;
 if(cljs.core.truth_(or__25979__auto__)){
@@ -276,29 +276,29 @@ return f.call(c,c,old_argv,new_argv);
 }
 }
 });
-;})(G__29647))
+;})(G__51745))
 
 break;
 case "componentWillUpdate":
-return ((function (G__29647){
+return ((function (G__51745){
 return (function reagent$impl$component$custom_wrapper_$_componentWillUpdate(nextprops){
 var c = this;
 return f.call(c,c,reagent.impl.component.props_argv.call(null,c,nextprops));
 });
-;})(G__29647))
+;})(G__51745))
 
 break;
 case "componentDidUpdate":
-return ((function (G__29647){
+return ((function (G__51745){
 return (function reagent$impl$component$custom_wrapper_$_componentDidUpdate(oldprops){
 var c = this;
 return f.call(c,c,reagent.impl.component.props_argv.call(null,c,oldprops));
 });
-;})(G__29647))
+;})(G__51745))
 
 break;
 case "componentWillMount":
-return ((function (G__29647){
+return ((function (G__51745){
 return (function reagent$impl$component$custom_wrapper_$_componentWillMount(){
 var c = this;
 (c["cljsMountOrder"] = reagent.impl.batching.next_mount_count.call(null));
@@ -309,26 +309,26 @@ return null;
 return f.call(c,c);
 }
 });
-;})(G__29647))
+;})(G__51745))
 
 break;
 case "componentDidMount":
-return ((function (G__29647){
+return ((function (G__51745){
 return (function reagent$impl$component$custom_wrapper_$_componentDidMount(){
 var c = this;
 return f.call(c,c);
 });
-;})(G__29647))
+;})(G__51745))
 
 break;
 case "componentWillUnmount":
-return ((function (G__29647){
+return ((function (G__51745){
 return (function reagent$impl$component$custom_wrapper_$_componentWillUnmount(){
 var c = this;
-var G__29649_29651 = (c["cljsRatom"]);
-if((G__29649_29651 == null)){
+var G__51747_51749 = (c["cljsRatom"]);
+if((G__51747_51749 == null)){
 } else {
-reagent.ratom.dispose_BANG_.call(null,G__29649_29651);
+reagent.ratom.dispose_BANG_.call(null,G__51747_51749);
 }
 
 reagent.impl.batching.mark_rendered.call(null,c);
@@ -339,7 +339,7 @@ return null;
 return f.call(c,c);
 }
 });
-;})(G__29647))
+;})(G__51745))
 
 break;
 default:
@@ -381,21 +381,21 @@ reagent.impl.component.add_obligatory = (function reagent$impl$component$add_obl
 return cljs.core.merge.call(null,reagent.impl.component.obligatory,fun_map);
 });
 reagent.impl.component.wrap_funs = (function reagent$impl$component$wrap_funs(fmap){
-var renders_29654 = cljs.core.select_keys.call(null,fmap,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"render","render",-1408033454),new cljs.core.Keyword(null,"reagentRender","reagentRender",-358306383),new cljs.core.Keyword(null,"componentFunction","componentFunction",825866104)], null));
-var render_fun_29655 = cljs.core.first.call(null,cljs.core.vals.call(null,renders_29654));
-if((cljs.core.count.call(null,renders_29654) > (0))){
+var renders_51752 = cljs.core.select_keys.call(null,fmap,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"render","render",-1408033454),new cljs.core.Keyword(null,"reagentRender","reagentRender",-358306383),new cljs.core.Keyword(null,"componentFunction","componentFunction",825866104)], null));
+var render_fun_51753 = cljs.core.first.call(null,cljs.core.vals.call(null,renders_51752));
+if((cljs.core.count.call(null,renders_51752) > (0))){
 } else {
 throw (new Error([cljs.core.str("Assert failed: "),cljs.core.str("Missing reagent-render"),cljs.core.str("\n"),cljs.core.str("(pos? (count renders))")].join('')));
 }
 
-if(((1) === cljs.core.count.call(null,renders_29654))){
+if(((1) === cljs.core.count.call(null,renders_51752))){
 } else {
 throw (new Error([cljs.core.str("Assert failed: "),cljs.core.str("Too many render functions supplied"),cljs.core.str("\n"),cljs.core.str("(== 1 (count renders))")].join('')));
 }
 
-if(cljs.core.ifn_QMARK_.call(null,render_fun_29655)){
+if(cljs.core.ifn_QMARK_.call(null,render_fun_51753)){
 } else {
-throw (new Error([cljs.core.str("Assert failed: "),cljs.core.str([cljs.core.str("Render must be a function, not "),cljs.core.str(cljs.core.pr_str.call(null,render_fun_29655))].join('')),cljs.core.str("\n"),cljs.core.str("(ifn? render-fun)")].join('')));
+throw (new Error([cljs.core.str("Assert failed: "),cljs.core.str([cljs.core.str("Render must be a function, not "),cljs.core.str(cljs.core.pr_str.call(null,render_fun_51753))].join('')),cljs.core.str("\n"),cljs.core.str("(ifn? render-fun)")].join('')));
 }
 
 
@@ -421,8 +421,8 @@ return or__25979__auto__;
 return reagent.impl.util.fun_name.call(null,render_fun__$1);
 }
 })())].join('');
-var name__$1 = (function (){var G__29653 = name;
-switch (G__29653) {
+var name__$1 = (function (){var G__51751 = name;
+switch (G__51751) {
 case "":
 return [cljs.core.str(cljs.core.gensym.call(null,"reagent"))].join('');
 
@@ -441,10 +441,10 @@ return cljs.core.assoc.call(null,fmap__$1,new cljs.core.Keyword(null,"displayNam
 });
 reagent.impl.component.map_to_js = (function reagent$impl$component$map_to_js(m){
 return cljs.core.reduce_kv.call(null,(function (o,k,v){
-var G__29658 = o;
-(G__29658[cljs.core.name.call(null,k)] = v);
+var G__51756 = o;
+(G__51756[cljs.core.name.call(null,k)] = v);
 
-return G__29658;
+return G__51756;
 }),({}),m);
 });
 reagent.impl.component.cljsify = (function reagent$impl$component$cljsify(body){
@@ -459,11 +459,11 @@ throw (new Error("Assert failed: (map? body)"));
 return (reagent.impl.util.react["createClass"])(reagent.impl.component.cljsify.call(null,body));
 });
 reagent.impl.component.component_path = (function reagent$impl$component$component_path(c){
-var elem = (function (){var G__29664 = (function (){var or__25979__auto__ = (function (){var G__29666 = c;
-if((G__29666 == null)){
+var elem = (function (){var G__51762 = (function (){var or__25979__auto__ = (function (){var G__51764 = c;
+if((G__51764 == null)){
 return null;
 } else {
-return (G__29666["_reactInternalInstance"]);
+return (G__51764["_reactInternalInstance"]);
 }
 })();
 if(cljs.core.truth_(or__25979__auto__)){
@@ -472,27 +472,27 @@ return or__25979__auto__;
 return c;
 }
 })();
-if((G__29664 == null)){
+if((G__51762 == null)){
 return null;
 } else {
-return (G__29664["_currentElement"]);
+return (G__51762["_currentElement"]);
 }
 })();
-var name = (function (){var G__29667 = elem;
-var G__29667__$1 = (((G__29667 == null))?null:(G__29667["type"]));
-if((G__29667__$1 == null)){
+var name = (function (){var G__51765 = elem;
+var G__51765__$1 = (((G__51765 == null))?null:(G__51765["type"]));
+if((G__51765__$1 == null)){
 return null;
 } else {
-return (G__29667__$1["displayName"]);
+return (G__51765__$1["displayName"]);
 }
 })();
-var path = (function (){var G__29668 = elem;
-var G__29668__$1 = (((G__29668 == null))?null:(G__29668["_owner"]));
-var G__29668__$2 = (((G__29668__$1 == null))?null:reagent$impl$component$component_path.call(null,G__29668__$1));
-if((G__29668__$2 == null)){
+var path = (function (){var G__51766 = elem;
+var G__51766__$1 = (((G__51766 == null))?null:(G__51766["_owner"]));
+var G__51766__$2 = (((G__51766__$1 == null))?null:reagent$impl$component$component_path.call(null,G__51766__$1));
+if((G__51766__$2 == null)){
 return null;
 } else {
-return [cljs.core.str(G__29668__$2),cljs.core.str(" > ")].join('');
+return [cljs.core.str(G__51766__$2),cljs.core.str(" > ")].join('');
 }
 })();
 var res = [cljs.core.str(path),cljs.core.str(name)].join('');
@@ -508,12 +508,12 @@ var n = (function (){var or__25979__auto__ = reagent.impl.component.component_pa
 if(cljs.core.truth_(or__25979__auto__)){
 return or__25979__auto__;
 } else {
-var G__29670 = c;
-var G__29670__$1 = (((G__29670 == null))?null:G__29670.constructor);
-if((G__29670__$1 == null)){
+var G__51768 = c;
+var G__51768__$1 = (((G__51768 == null))?null:G__51768.constructor);
+if((G__51768__$1 == null)){
 return null;
 } else {
-return reagent.impl.util.fun_name.call(null,G__29670__$1);
+return reagent.impl.util.fun_name.call(null,G__51768__$1);
 }
 }
 })();
@@ -570,4 +570,4 @@ return reagent.impl.component.as_class.call(null,comp);
 }
 });
 
-//# sourceMappingURL=component.js.map?rel=1499543323921
+//# sourceMappingURL=component.js.map?rel=1499548750938

@@ -27,9 +27,9 @@
                         :-webkitAppearance "none" 
                         :border "1px solid #fff"}
                 :on-change #(swap! state/app-state assoc-in [:colors] (-> % .-target .-value))}
-        [:option {:value "light"} "Light"]
+        [:option {:value "dark"} "Dark"]
         [:option {:value "grey"} "Grey"]
-        [:option {:value "dark"} "Dark"]])
+        [:option {:value "light"} "Light"]])
 
 ; Draws the nav menu that opens up from the side.  (Was originally a modal, hence the name.)
 (defn Modal [] 
