@@ -4,6 +4,7 @@
  
 (defonce app-state (atom {:chords chords/chordList 
                             :key "A" 
+                            :quality "All"
                             :showModal false
                             :colors "light"}))
 

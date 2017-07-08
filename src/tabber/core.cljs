@@ -76,14 +76,14 @@
 
 ; String -> Html
 (defn ChordChart [chord]
-	(let [[chordName e6 a d g b e bar] chord]
+	(let [[chordName quality e6 a d g b e bar] chord]
 		[:div {:style {:position "relative"
 					:width "200px"
 					:height "150px"
 					:border (str "1px solid " (color/ReturnColors :t2))
 					:backgroundColor (color/ReturnColors :chart)
 					:margin "50px"}}
-		[:div {:style {:position "absolute" :top "-50px"  :fontSize "30px" :color (color/ReturnColors :t1)} } (str chordName)]
+		[:div {:style {:position "absolute" :top "-50px"  :fontSize "30px" :color (color/ReturnColors :t1)} } (str chordName quality)]
 		[HorizontalStrings]
 		[Nut]
 		[VerticalFretLine "50px"]
@@ -95,12 +95,12 @@
 		[FretFingerMarker :g g]
 		[FretFingerMarker :b b]
 		[FretFingerMarker :e e]
-		[:div {:style {:position "absolute" :bottom "-35px" :right "0" :fontSize "15px"}} (if (not(= nil bar )) (str "bar " bar) "")]]))
+		[:div {:style {:position "absolute" :bottom "-35px" :right "0" :color (color/ReturnColors :t2) :fontSize "15px"}} (if (not(= nil bar )) (str "bar " bar) "")]]))
 
 (defn KeyButton [key]
 	[:button {:style {:width "40px" 
 						:height "35px" 
-						:margin "5px 20px"
+						:margin "5px 10px"
 						:fontSize "20px"
 						:padding "5px"
 						:border "1px solid #555"
@@ -109,25 +109,43 @@
 						:backgroundColor (if (= key (:key @state/app-state)) (color/ReturnColors :f1) "rgba(0,0,0,0)")} 
 				:on-click (fn [e] (swap! state/app-state assoc-in [:key] key))} key])
 
+(defn QualityButton [quality]
+	[:button {:style {:width "30px" 
+						:height "25px" 
+						:margin "5px 10px"
+						:fontSize "14px"
+						:padding "5px"
+						:border "1px solid #555"
+						:color (color/ReturnColors :t1)
+						:cursor "pointer"
+						:backgroundColor (if (= quality (:quality @state/app-state)) (color/ReturnColors :f1) "rgba(0,0,0,0)")} 
+				:on-click (fn [e] (swap! state/app-state assoc-in [:quality] quality))} quality])
+
 (def keyList
-	["All" "A" "B" "C" "D" "E" "F" "G"])
+	["All" "A" "Ab" "B" "Bb" "C" "C#" "D" "Db" "E" "Eb" "F" "F#""G" "G#"])
+
+(def qualityList
+	["All" "M" "m" "7" "M7" "m7"])
 
 (defn KeyFilter [collection]
-	(let [key (:key @state/app-state)]
-		(if (= key "All") 
-			collection
-			(filter #(= (first (first %)) key) collection))))
+	(let [key (:key @state/app-state) quality (:quality @state/app-state)]
+		(cond 
+			(and (= key "All") (= quality "All")) collection
+			(= key "All") (filter #(= (second %) quality) collection)
+			(= quality "All") (filter #(= (first %) key) collection)
+				:else (filter #(and (= (first  %) key) (= (second %) quality)) collection))))	
   
-(defn chords []
+(defn Chords []
 	[:div {:style{ :marginTop "100px" :textAlign "center"}}
 		[modal/ModalIcon]
 		[modal/Modal]
 		(map KeyButton keyList)
+		[:div (map QualityButton qualityList)]
 		[:div {:style{:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "50px"}}
 			(map ChordChart (KeyFilter (:chords @state/app-state)))]])
       
 
-(reagent/render-component [chords]
+(reagent/render-component [Chords]
                           (. js/document (getElementById "app")))
 
 (defn on-js-reload [])
