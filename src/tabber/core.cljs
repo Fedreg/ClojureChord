@@ -76,6 +76,7 @@
 
 ; String -> Html
 (defn ChordChart [chord]
+	(print chord)
 	(let [[chordName quality e6 a d g b e bar] chord]
 		[:div {:style {:position "relative"
 					:width "200px"
@@ -135,6 +136,14 @@
 			(= quality "All") (filter #(= (first %) key) collection)
 				:else (filter #(and (= (first  %) key) (= (second %) quality)) collection))))	
 
+(defn SongChordFilter [collection song index]
+	(let [key (first (nth song index)) quality (second (nth song index))]
+		(filter #(and (= key (first %)) (= quality (second %))) collection)))
+
+(defn SongChordDisplay []
+	(js/setInterval #(swap! state/app-state update-in [:index] inc) 1000)
+	[:div str (nth (:song @state/app-state) (:index @state/app-state)) (:index @state/app-state)])
+
 (defn ChordChartPage []
 	[:div
 		(map KeyButton keyList)
@@ -143,8 +152,20 @@
 			(map ChordChart (KeyFilter (:chords @state/app-state)))]])
 
 (defn SongPage []
-	(js/setInterval #(swap! state/app-state update-in [:index] inc) 1000)
-	[:div str (nth (:song @state/app-state) (:index @state/app-state)) (:index @state/app-state)])
+	[:div
+		[:h1 {:style {:color (color/ReturnColors :t1)}} (nth (:song @state/app-state) 0)]
+		[:div {:style {:transform "scale(1.5)" :width "1vw" :margin "200px 0 0 20%"}}
+			(map ChordChart (SongChordFilter (:chords @state/app-state) (:song @state/app-state) (:index @state/app-state)))]
+		[:div {:style {:transform "scale(0.5)" :position "fixed" :top "175px" :right "50px"}}
+			(if (< (+ 1 (:index @state/app-state)) (count(:song @state/app-state)))
+				(map ChordChart (SongChordFilter (:chords @state/app-state) (:song @state/app-state) (+ 1 (:index @state/app-state))))
+				"")]
+		[:div {:style {:transform "scale(0.5)" :position "fixed" :top "375px" :right "50px"}}
+			(if (< (+ 2 (:index @state/app-state)) (count(:song @state/app-state)))
+				(map ChordChart (SongChordFilter (:chords @state/app-state) (:song @state/app-state) (+ 2 (:index @state/app-state))))
+				"")]
+		[:button {:on-click #(swap! state/app-state update-in [:index] dec) :style {:position "fixed" :bottom "25px" :left "25px"}} "<-"]
+		[:button {:on-click #(swap! state/app-state update-in [:index] inc) :style {:position "fixed" :bottom "25px" :right "25px"}} "->"]])
 
 (defn Chords []
 	[:div {:style{ :marginTop "100px" :textAlign "center"}}

@@ -6,10 +6,10 @@
                             :key "A" 
                             :quality "All"
                             :showModal false
-                            :index 0
-                            :song '(("A" "m" 1) ("C" "M" 1) ("F" "M" 2))
+                            :index 1
+                            :song '("Test Song" ("A" "m" 1) ("C" "M" 1) ("F" "M" 2) ("D" "m" 3) ("F" "M" 4) ("D" "M" 1))
                             :currentPage "Chord Charts"
-                            :colors "light"}))
+                            :colors "dark"}))
                             ; :song [("A" "m" 1) ("C" "M" 1) ("F" "M" 2)]
 
 
