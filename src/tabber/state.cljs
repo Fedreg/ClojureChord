@@ -6,6 +6,7 @@
                             :key "A" 
                             :quality "All"
                             :showModal false
+                            :currentPage "Chord Charts"
                             :colors "light"}))
 
 

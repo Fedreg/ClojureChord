@@ -100,11 +100,11 @@
 (defn KeyButton [key]
 	[:button {:style {:width "40px" 
 						:height "35px" 
-						:margin "5px 10px"
+						:margin "5px"
 						:fontSize "20px"
 						:padding "5px"
 						:border "1px solid #555"
-						:color (color/ReturnColors :t1)
+						:color (if (= key (:key @state/app-state)) (color/ReturnColors :t1) (color/ReturnColors :t2))
 						:cursor "pointer"
 						:backgroundColor (if (= key (:key @state/app-state)) (color/ReturnColors :f1) "rgba(0,0,0,0)")} 
 				:on-click (fn [e] (swap! state/app-state assoc-in [:key] key))} key])
@@ -112,11 +112,11 @@
 (defn QualityButton [quality]
 	[:button {:style {:width "30px" 
 						:height "25px" 
-						:margin "5px 10px"
+						:margin "5px"
 						:fontSize "14px"
 						:padding "5px"
 						:border "1px solid #555"
-						:color (color/ReturnColors :t1)
+						:color (if (= quality (:quality @state/app-state)) (color/ReturnColors :t1) (color/ReturnColors :t2))
 						:cursor "pointer"
 						:backgroundColor (if (= quality (:quality @state/app-state)) (color/ReturnColors :f1) "rgba(0,0,0,0)")} 
 				:on-click (fn [e] (swap! state/app-state assoc-in [:quality] quality))} quality])
@@ -134,15 +134,26 @@
 			(= key "All") (filter #(= (second %) quality) collection)
 			(= quality "All") (filter #(= (first %) key) collection)
 				:else (filter #(and (= (first  %) key) (= (second %) quality)) collection))))	
-  
-(defn Chords []
-	[:div {:style{ :marginTop "100px" :textAlign "center"}}
-		[modal/ModalIcon]
-		[modal/Modal]
+
+(defn ChordChartPage []
+	[:div
 		(map KeyButton keyList)
 		[:div (map QualityButton qualityList)]
 		[:div {:style{:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "50px"}}
 			(map ChordChart (KeyFilter (:chords @state/app-state)))]])
+
+(defn SongPage []
+	[:div "Here is the Song Page"])
+
+(defn Chords []
+	[:div {:style{ :marginTop "100px" :textAlign "center"}}
+		[modal/ModalIcon]
+		[modal/Modal]
+		; [ChordChartPage]
+		(cond
+			(= "Chord Charts" (:currentPage @state/app-state)) (ChordChartPage)
+			(= "Song Chords" (:currentPage @state/app-state)) (SongPage)
+				:else [:div (:currentPage @state/app-state)])])	
       
 
 (reagent/render-component [Chords]

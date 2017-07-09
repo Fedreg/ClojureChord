@@ -31,6 +31,12 @@
         [:option {:value "grey"} "Grey"]
         [:option {:value "light"} "Light"]])
 
+(defn PageSelector [page]
+    [:div {:style { :margin "20px 50px"
+                :textDecoration "none" 
+                :color (if (= (:currentPage @state/app-state) page) (color/ReturnColors :f3) (color/ReturnColors :t2))}
+         :on-click #(swap! state/app-state assoc-in [:currentPage] page)} page])
+
 ; Draws the nav menu that opens up from the side.  (Was originally a modal, hence the name.)
 (defn Modal [] 
     [:div {:style {:position "fixed"
@@ -45,6 +51,8 @@
                         :color (color/ReturnColors :t1) 
                         :backgroundColor (color/ReturnColors :menu)}}
         [:div "Select Theme"]
-        [ThemeSelect]])
+        [ThemeSelect]
+        [:div [PageSelector "Chord Charts"]]
+        [:div [PageSelector "Song Chords"]]])
 
 
