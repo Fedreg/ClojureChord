@@ -143,7 +143,8 @@
 			(map ChordChart (KeyFilter (:chords @state/app-state)))]])
 
 (defn SongPage []
-	[:div "Here is the Song Page"])
+	(js/setInterval #(swap! state/app-state update-in [:index] inc) 1000)
+	[:div str (nth (:song @state/app-state) (:index @state/app-state)) (:index @state/app-state)])
 
 (defn Chords []
 	[:div {:style{ :marginTop "100px" :textAlign "center"}}
