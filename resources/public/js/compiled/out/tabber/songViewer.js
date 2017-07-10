@@ -52,8 +52,8 @@ tabber.songViewer.SongChordFilter = (function tabber$songViewer$SongChordFilter(
 var key = cljs.core.first.call(null,cljs.core.nth.call(null,song,index));
 var quality = cljs.core.second.call(null,cljs.core.nth.call(null,song,index));
 return cljs.core.filter.call(null,((function (key,quality){
-return (function (p1__34192_SHARP_){
-return (cljs.core._EQ_.call(null,key,cljs.core.first.call(null,p1__34192_SHARP_))) && (cljs.core._EQ_.call(null,quality,cljs.core.second.call(null,p1__34192_SHARP_)));
+return (function (p1__46203_SHARP_){
+return (cljs.core._EQ_.call(null,key,cljs.core.first.call(null,p1__46203_SHARP_))) && (cljs.core._EQ_.call(null,quality,cljs.core.second.call(null,p1__46203_SHARP_)));
 });})(key,quality))
 ,collection);
 });
@@ -87,4 +87,4 @@ tabber.songViewer.SongPage = (function tabber$songViewer$SongPage(){
 return new cljs.core.PersistentVector(null, 8, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.SongTitle], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.TempoDisplay], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.CurrentChord], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.OnDeckChord,(1),"100px"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.OnDeckChord,(2),"300px"], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.BeatCounter], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.StartButton], null)], null);
 });
 
-//# sourceMappingURL=songViewer.js.map?rel=1499706251667
+//# sourceMappingURL=songViewer.js.map?rel=1499706571208
