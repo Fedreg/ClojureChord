@@ -7,9 +7,9 @@
                             :quality "All"
                             :showModal false
                             :index 1
-                            :song '("Test Song" ("A" "m" 1) ("C" "M" 1) ("F" "M" 2) ("D" "m" 3) ("F" "M" 4) ("D" "M" 1))
+                            :song '("Hey Jude" ("D" "M" 4) ("A" "M" 4) ("A" "7" 4) ("D" "M" 4) ("G" "M" 4) ("D" "M" 4) ("A" "7" 4) ("D" "M" 4))
                             :currentPage "Chord Charts"
+                            :tempo 80
                             :colors "dark"}))
-                            ; :song [("A" "m" 1) ("C" "M" 1) ("F" "M" 2)]
 
 
