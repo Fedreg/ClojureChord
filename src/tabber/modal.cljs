@@ -53,6 +53,6 @@
         [:div "Select Theme"]
         [ThemeSelect]
         [:div [PageSelector "Chord Charts"]]
-        [:div [PageSelector "Song Chords"]]])
+        [:div [PageSelector "Song Player"]]])
 
 

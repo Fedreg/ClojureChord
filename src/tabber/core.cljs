@@ -23,7 +23,7 @@
 		; [ChordChartPage]
 		(cond
 			(= "Chord Charts" (:currentPage @state/app-state)) (chart/ChordChartPage)
-			(= "Song Chords" (:currentPage @state/app-state)) (song/SongPage)
+			(= "Song Player" (:currentPage @state/app-state)) (song/SongPage)
 				:else [:div "Error, please reload"])])	
       
 

@@ -105,7 +105,7 @@
 
 (defn QualityButton [quality]
 	[:button {:style {:width "30px" 
-						:height "25px" 
+						:height "30px" 
 						:margin "5px"
 						:fontSize "14px"
 						:padding "5px"
