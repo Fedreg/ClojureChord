@@ -1,9 +1,11 @@
 (ns tabber.state
     (:require [reagent.core :as reagent :refer [atom]]
                 [tabber.chords :as chords]))
-(def HeyJude '("Hey Jude" 
-    ("X" "X" 4) ("D" "M" 4) ("A" "M" 4) ("A" "7" 4) ("D" "M" 4) ("G" "M" 4) ("D" "M" 4) ("A" "7" 4) ("D" "M" 4)
-    ("D" "M" 4) ("A" "M" 4) ("A" "7" 4) ("D" "M" 4) ("G" "M" 4) ("D" "M" 4) ("A" "7" 4) ("D" "M" 4)))
+(def HeyJude '("Hey Jude" ("X" "X" 4) 
+    ("D" "M" 4) ("A" "M" 4) ("A" "7" 4) ("D" "M" 4) ("G" "M" 4) ("D" "M" 4) ("A" "7" 4) ("D" "M" 4)
+    ("D" "M" 4) ("A" "M" 4) ("A" "7" 4) ("D" "M" 4) ("G" "M" 4) ("D" "M" 4) ("A" "7" 4) ("D" "M" 4) 
+    ("D" "7" 4) ("G" "M" 2) ("D" "M" 2) ("E" "m" 4) ("A" "7" 4) ("D" "M" 4)
+    ("D" "7" 4) ("G" "M" 2) ("D" "M" 2) ("E" "m" 4) ("A" "7" 4) ("D" "M" 4)))
 
 (defonce app-state (atom {:chords chords/chordList 
                             :key "A" 

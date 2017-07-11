@@ -9,22 +9,15 @@
     (->> (:tempo @state/app-state) 
         (/ 60)
         (* 1000)))
-(print (Tempo))
+
 (defn StartBeatCounter []
     (let [song (:song @state/app-state)
             beat (:beat @state/app-state)
             index (:index @state/app-state)
-            numberOfBeats (->> (nth song index)
-                            (last))]
-    (if (<= beat numberOfBeats)
-        (js/setTimeout #((swap! state/app-state update-in [:beat] inc) (StartBeatCounter)) (Tempo))
-        (swap! state/app-state assoc-in [:beat] 1))))
-
-(defn StartSong []
-    (let [song (:song @state/app-state)
-            index (:index @state/app-state)]
-	(if (< index (count song))
-		(js/setTimeout #((swap! state/app-state update-in [:index] inc) (StartSong) (StartBeatCounter)) (* (Tempo) (last (nth song index)))))))
+            numberOfBeats (inc (last (nth song index)))]
+    (if (< beat numberOfBeats)
+        (js/setTimeout #((swap! state/app-state update-in [:beat] inc) (StartBeatCounter) (print beat numberOfBeats)) (Tempo))
+        ((swap! state/app-state assoc-in [:beat] 1) (StartBeatCounter) (swap! state/app-state update-in [:index] inc) (print "reset!")))))
 
 (defn BeatCounter []
     (let [beat (:beat @state/app-state)
@@ -69,7 +62,7 @@
          (nth (:song @state/app-state) 0)])
 
 (defn StartButton []
-    [:button {:on-click #(do (swap! state/app-state assoc-in [:index] 1) (StartSong) (StartBeatCounter)) 
+    [:button {:on-click #(do (swap! state/app-state assoc-in [:index] 1) (StartBeatCounter)) 
             :style {:position "fixed" 
                     :bottom "25px" 
                     :left "calc(50% - 50px)"
