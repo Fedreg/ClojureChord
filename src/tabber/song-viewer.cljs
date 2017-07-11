@@ -49,7 +49,9 @@
 
 (defn CurrentChord []
     [:div {:style {:transform "scale(1.5)" :width "1vw" :margin "250px 0 0 20%"}}
-		(map chart/ChordChart (SongChordFilter (:chords @state/app-state) (:song @state/app-state) (:index @state/app-state)))])
+        (if (= 1 (:index @state/app-state))
+            [:div {:style {:width "200px" :fontSize "30px" :color (color/ReturnColors :t1)}} "Get Ready!"]
+		    (map chart/ChordChart (SongChordFilter (:chords @state/app-state) (:song @state/app-state) (:index @state/app-state))))])
 
 (defn OnDeckChord [num upper]
     [:div {:style {:transform "scale(0.9)" 
