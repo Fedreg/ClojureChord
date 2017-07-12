@@ -9,13 +9,6 @@
             [tabber.state :as state]))
 
 
-(enable-console-print!)
-
-
- 
-
-
-
 (defn Chords []
 	[:div {:style{ :marginTop "100px" :textAlign "center"}}
 		[modal/ModalIcon]
