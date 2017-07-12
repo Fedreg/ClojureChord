@@ -1,6 +1,7 @@
 (ns tabber.state
     (:require [reagent.core :as reagent :refer [atom]]
                 [tabber.chords :as chords]))
+
 (def HeyJude '("Hey Jude" ("X" "X" 4) 
     ("D" "M" 4) ("A" "M" 4) ("A" "7" 4) ("D" "M" 4) ("G" "M" 4) ("D" "M" 4) ("A" "7" 4) ("D" "M" 4)
     ("D" "M" 4) ("A" "M" 4) ("A" "7" 4) ("D" "M" 4) ("G" "M" 4) ("D" "M" 4) ("A" "7" 4) ("D" "M" 4) 
@@ -13,7 +14,8 @@
                             :quality "All"
                             :showModal false
                             :index 1
-                            :song HeyJude 
+                            :song HeyJude
+                            :rawSong "A/M/4 D/M/3 E/M/7" 
                             :currentPage "Chord Charts"
                             :tempo 80
                             :colors "dark"}))
