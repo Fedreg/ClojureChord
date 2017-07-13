@@ -1,10 +1,6 @@
-# tabber
+# ClojureChord
 
-FIXME: Write a one-line description of your library/project.
-
-## Overview
-
-FIXME: Write a paragraph about the library/project and highlight its goals.
+A clojure application for learning and playing songs on the guitar.  Interactive chord charts and a song player that will cycle through the song's chords as they come up.  Experimental.
 
 ## Setup
 
