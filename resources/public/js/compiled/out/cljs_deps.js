@@ -1,9 +1,9 @@
 goog.addDependency("base.js", ['goog'], []);
 goog.addDependency("../cljs/core.js", ['cljs.core'], ['goog.string', 'goog.object', 'goog.math.Integer', 'goog.string.StringBuffer', 'goog.array', 'goog.math.Long']);
+goog.addDependency("../devtools/defaults.js", ['devtools.defaults'], ['cljs.core']);
 goog.addDependency("../devtools/protocols.js", ['devtools.protocols'], ['cljs.core']);
 goog.addDependency("../devtools/context.js", ['devtools.context'], ['cljs.core']);
 goog.addDependency("../devtools/format.js", ['devtools.format'], ['cljs.core', 'devtools.context']);
-goog.addDependency("../devtools/defaults.js", ['devtools.defaults'], ['cljs.core']);
 goog.addDependency("../devtools/prefs.js", ['devtools.prefs'], ['cljs.core', 'devtools.defaults']);
 goog.addDependency("../devtools/version.js", ['devtools.version'], ['cljs.core']);
 goog.addDependency("../clojure/string.js", ['clojure.string'], ['goog.string', 'cljs.core', 'goog.string.StringBuffer']);
@@ -18,10 +18,10 @@ goog.addDependency("../devtools/formatters/printing.js", ['devtools.formatters.p
 goog.addDependency("../clojure/walk.js", ['clojure.walk'], ['cljs.core']);
 goog.addDependency("../devtools/formatters/templating.js", ['devtools.formatters.templating'], ['devtools.formatters.helpers', 'devtools.formatters.state', 'devtools.util', 'cljs.core', 'devtools.protocols', 'cljs.pprint', 'clojure.string', 'clojure.walk']);
 goog.addDependency("../devtools/formatters/markup.js", ['devtools.formatters.markup'], ['devtools.formatters.helpers', 'devtools.formatters.printing', 'devtools.formatters.templating', 'devtools.formatters.state', 'cljs.core', 'devtools.munging']);
-goog.addDependency("../devtools/toolbox.js", ['devtools.toolbox'], ['devtools.formatters.markup', 'devtools.formatters.templating', 'cljs.core', 'devtools.protocols']);
 goog.addDependency("../devtools/reporter.js", ['devtools.reporter'], ['devtools.util', 'cljs.core']);
 goog.addDependency("../devtools/formatters/budgeting.js", ['devtools.formatters.budgeting'], ['devtools.formatters.helpers', 'devtools.formatters.markup', 'devtools.formatters.templating', 'devtools.formatters.state', 'cljs.core']);
 goog.addDependency("../devtools/formatters/core.js", ['devtools.formatters.core'], ['devtools.formatters.helpers', 'devtools.formatters.markup', 'devtools.formatters.templating', 'devtools.formatters.state', 'cljs.core', 'devtools.reporter', 'devtools.protocols', 'devtools.formatters.budgeting', 'devtools.format', 'devtools.prefs']);
+goog.addDependency("../devtools/toolbox.js", ['devtools.toolbox'], ['devtools.formatters.markup', 'devtools.formatters.templating', 'cljs.core', 'devtools.protocols']);
 goog.addDependency("../cljs/stacktrace.js", ['cljs.stacktrace'], ['goog.string', 'cljs.core', 'clojure.string']);
 goog.addDependency("../devtools/async.js", ['devtools.async'], ['cljs.core', 'goog.async.nextTick']);
 goog.addDependency("../devtools/formatters.js", ['devtools.formatters'], ['devtools.formatters.core', 'devtools.util', 'cljs.core', 'goog.labs.userAgent.browser', 'devtools.context', 'devtools.prefs']);
@@ -58,10 +58,10 @@ goog.addDependency("../reagent/dom/server.js", ['reagent.dom.server'], ['reagent
 goog.addDependency("../react-dom.inc.js", ['cljsjs.react.dom'], ['cljsjs.react']);
 goog.addDependency("../reagent/dom.js", ['reagent.dom'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'cljsjs.react.dom', 'reagent.debug']);
 goog.addDependency("../reagent/core.js", ['reagent.core'], ['reagent.impl.util', 'reagent.dom.server', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug', 'reagent.dom']);
-goog.addDependency("../tabber/state.js", ['tabber.state'], ['tabber.chords', 'reagent.core', 'cljs.core']);
+goog.addDependency("../tabber/state.js", ['tabber.state'], ['tabber.chords', 'reagent.core', 'cljs.core', 'clojure.string']);
 goog.addDependency("../tabber/colorThemes.js", ['tabber.colorThemes'], ['cljs.core', 'tabber.state']);
-goog.addDependency("../tabber/chordChart.js", ['tabber.chordChart'], ['tabber.colorThemes', 'cljs.core', 'tabber.state']);
-goog.addDependency("../tabber/songViewer.js", ['tabber.songViewer'], ['tabber.colorThemes', 'tabber.chordChart', 'cljs.core', 'tabber.state']);
+goog.addDependency("../tabber/chordChart.js", ['tabber.chordChart'], ['tabber.colorThemes', 'reagent.core', 'cljs.core', 'tabber.state']);
+goog.addDependency("../tabber/songViewer.js", ['tabber.songViewer'], ['tabber.colorThemes', 'tabber.chordChart', 'reagent.core', 'cljs.core', 'tabber.state', 'clojure.string']);
 goog.addDependency("../tabber/modal.js", ['tabber.modal'], ['tabber.colorThemes', 'cljs.core', 'tabber.state']);
 goog.addDependency("../tabber/core.js", ['tabber.core'], ['tabber.chords', 'tabber.colorThemes', 'tabber.chordChart', 'reagent.core', 'cljs.core', 'tabber.state', 'tabber.songViewer', 'tabber.modal', 'clojure.string']);
 goog.addDependency("../figwheel/connect/build_dev.js", ['figwheel.connect.build_dev'], ['cljs.core', 'figwheel.client', 'tabber.core', 'figwheel.client.utils']);

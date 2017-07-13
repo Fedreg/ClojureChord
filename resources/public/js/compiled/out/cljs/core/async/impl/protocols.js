@@ -270,23 +270,23 @@ throw cljs.core.missing_protocol.call(null,"Buffer.close-buf!",b);
 });
 
 cljs.core.async.impl.protocols.add_BANG_ = (function cljs$core$async$impl$protocols$add_BANG_(var_args){
-var args35990 = [];
-var len__27054__auto___35993 = arguments.length;
-var i__27055__auto___35994 = (0);
+var args63665 = [];
+var len__27054__auto___63668 = arguments.length;
+var i__27055__auto___63669 = (0);
 while(true){
-if((i__27055__auto___35994 < len__27054__auto___35993)){
-args35990.push((arguments[i__27055__auto___35994]));
+if((i__27055__auto___63669 < len__27054__auto___63668)){
+args63665.push((arguments[i__27055__auto___63669]));
 
-var G__35995 = (i__27055__auto___35994 + (1));
-i__27055__auto___35994 = G__35995;
+var G__63670 = (i__27055__auto___63669 + (1));
+i__27055__auto___63669 = G__63670;
 continue;
 } else {
 }
 break;
 }
 
-var G__35992 = args35990.length;
-switch (G__35992) {
+var G__63667 = args63665.length;
+switch (G__63667) {
 case 1:
 return cljs.core.async.impl.protocols.add_BANG_.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -296,7 +296,7 @@ return cljs.core.async.impl.protocols.add_BANG_.cljs$core$IFn$_invoke$arity$2((a
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args35990.length)].join('')));
+throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args63665.length)].join('')));
 
 }
 });
@@ -323,4 +323,4 @@ cljs.core.async.impl.protocols.add_BANG_.cljs$lang$maxFixedArity = 2;
 cljs.core.async.impl.protocols.UnblockingBuffer = function(){};
 
 
-//# sourceMappingURL=protocols.js.map?rel=1499706453774
+//# sourceMappingURL=protocols.js.map?rel=1499924852597
