@@ -3,7 +3,7 @@
               [tabber.colorThemes :as color]
               [tabber.chordChart :as chart]
               [reagent.core :as reagent :refer [cursor]]
-              [clojure.string :as string]))
+              [clojure.string :as str]))
 
 (enable-console-print!)
 
@@ -16,6 +16,7 @@
 (def !song (cursor state/app-state [:song]))
 (def !tempo (cursor state/app-state [:tempo]))
 (def !chords (cursor state/app-state [:chords]))
+(def !rawSong (cursor state/app-state [:rawSong]))
 
 ;----------------------------------
 ; Component Styles 
@@ -88,14 +89,14 @@
 ; Components
 ;---------------------------------------------
 
-; Converts song data from string to list of lists....eventually.
-; (defn FormatSong []
-;     (as-> (:rawSong @state/app-state) song
-;         (string/split song #" ")
-;         (apply list song)
-;         (map (string.split song #"/") song)
-;         (map (js/parseInt) (last song))
-;         (print song)))
+; Converts song data from string to list of vectors
+(defn FormatSong []
+    (as-> @!rawSong song
+        (str/split song #" ")
+        (filter #(not (empty? %)) song)
+        (map #(str/split % #"/") song)
+        (cons ["X" "X" "4"] song)
+        (reset! state/app-state assoc-in [:song] song)))
 
 (defn Tempo []
     (->> @!tempo 
@@ -103,7 +104,11 @@
         (* 1000)))
 
 (defn StartBeatCounter []
-    (let [numberOfBeats (inc (last (nth @!song @!index)))]
+    (let [numberOfBeats (->>
+                            (nth @!song @!index)
+                            (last)
+                            (js/parseInt)
+                            (inc))]
     (if (< @!beat numberOfBeats)
         (js/setTimeout #((swap! state/app-state update-in [:beat] inc) (StartBeatCounter)) (Tempo))
         ((swap! state/app-state assoc-in [:beat] 1) (swap! state/app-state update-in [:index] inc) (StartBeatCounter)))))
@@ -112,6 +117,7 @@
     @!beat
     (let [range (->> (nth @!song @!index)
                     (last)
+                    (js/parseInt)
                     (inc)
                     (range 1))]
     [:div {:style BeatCounterStyle}

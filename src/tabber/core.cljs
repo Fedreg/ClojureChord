@@ -13,7 +13,6 @@
 	[:div {:style{ :marginTop "100px" :textAlign "center"}}
 		[modal/ModalIcon]
 		[modal/Modal]
-		; [ChordChartPage]
 		(cond
 			(= "Chord Charts" (:currentPage @state/app-state)) (chart/ChordChartPage)
 			(= "Song Player" (:currentPage @state/app-state)) (song/SongPage)
@@ -24,6 +23,7 @@
                           (. js/document (getElementById "app")))
 
 (defn on-js-reload [])
+	; (song/FormatSong)
   ;; optionally touch your state/app-state to force rerendering depending on
   ;; your application
   ;; (swap! state/app-state update-in [:__figwheel_counter] inc)
