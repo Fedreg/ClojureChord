@@ -47,7 +47,7 @@
 	:width "50px" 
 	:borderLeft "1px solid #333"})
 
-(def NutStyle
+(defn NutStyle []
 	{:position "absolute" 
 	:top "-1px" 
 	:right "-5px" 
@@ -55,21 +55,22 @@
 	:height "152px" 
 	:backgroundColor (color/ReturnColors :t2)})
 
-(def ChordChartStyle
+(defn ChordChartStyle []
 	{:position "relative"
 	:width "200px"
+	:minWidth "200px"
 	:height "150px"
 	:border (str "1px solid " (color/ReturnColors :t2))
 	:backgroundColor (color/ReturnColors :chart)
 	:margin "50px"})
 
-(def ChordChartNameStyle
+(defn ChordChartNameStyle []
 	{:position "absolute" 
 	:top "-50px"  
 	:fontSize "30px" 
 	:color (color/ReturnColors :t1)})
 
-(def ChordChartBarStyle
+(defn ChordChartBarStyle []
 	{:position "absolute" 
 	:bottom "-35px" 
 	:right "0" 
@@ -154,13 +155,13 @@
 	[:div {:style (VerticalFretlineStyle Yoffset)}])
 
 (defn Nut []
-	[:div {:style NutStyle }])
+	[:div {:style (NutStyle) }])
 
 ; String -> Html
 (defn ChordChart [chord]
 	(let [[chordName quality e6 a d g b e bar] chord]
-		[:div {:style ChordChartStyle }
-		[:div {:style ChordChartNameStyle } (str chordName quality)]
+		[:div {:style (ChordChartStyle) }
+		[:div {:style (ChordChartNameStyle) } (str chordName quality)]
 		[HorizontalStrings]
 		[Nut]
 		[VerticalFretLine "50px"]
@@ -172,7 +173,7 @@
 		[FretFingerMarker :g g]
 		[FretFingerMarker :b b]
 		[FretFingerMarker :e e]
-		[:div {:style ChordChartBarStyle} (if (not(= nil bar )) (str "bar " bar) "")]]))
+		[:div {:style (ChordChartBarStyle) } (if (not(= nil bar )) (str "bar " bar) "")]]))
 
 
 (defn KeyButton [key]
