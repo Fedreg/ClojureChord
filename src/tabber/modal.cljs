@@ -29,6 +29,7 @@
                 :on-change #(swap! state/app-state assoc-in [:colors] (-> % .-target .-value))}
         [:option {:value "dark"} "Dark"]
         [:option {:value "grey"} "Grey"]
+        [:option {:value "contrast"} "Contrast"]
         [:option {:value "light"} "Light"]])
 
 (defn PageSelector [page]
