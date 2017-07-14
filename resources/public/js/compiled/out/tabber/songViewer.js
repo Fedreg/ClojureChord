@@ -36,19 +36,19 @@ var song = songInfo;
 var song__$1 = cljs.core.first.call(null,song);
 var song__$2 = cljs.core.drop.call(null,(2),song__$1);
 var song__$3 = cljs.core.map.call(null,((function (song,song__$1,song__$2){
-return (function (p1__30835_SHARP_){
-return clojure.string.split.call(null,p1__30835_SHARP_,/ /);
+return (function (p1__30859_SHARP_){
+return clojure.string.split.call(null,p1__30859_SHARP_,/ /);
 });})(song,song__$1,song__$2))
 ,song__$2);
 var song__$4 = cljs.core.apply.call(null,cljs.core.concat,song__$3);
 var song__$5 = cljs.core.filter.call(null,((function (song,song__$1,song__$2,song__$3,song__$4){
-return (function (p1__30836_SHARP_){
-return !(clojure.string.blank_QMARK_.call(null,p1__30836_SHARP_));
+return (function (p1__30860_SHARP_){
+return !(clojure.string.blank_QMARK_.call(null,p1__30860_SHARP_));
 });})(song,song__$1,song__$2,song__$3,song__$4))
 ,song__$4);
 var song__$6 = cljs.core.map.call(null,((function (song,song__$1,song__$2,song__$3,song__$4,song__$5){
-return (function (p1__30837_SHARP_){
-return clojure.string.split.call(null,p1__30837_SHARP_,/\//);
+return (function (p1__30861_SHARP_){
+return clojure.string.split.call(null,p1__30861_SHARP_,/\//);
 });})(song,song__$1,song__$2,song__$3,song__$4,song__$5))
 ,song__$5);
 var song__$7 = cljs.core.cons.call(null,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, ["X","X","4"], null),song__$6);
@@ -83,23 +83,23 @@ tabber.songViewer.SongChordFilter = (function tabber$songViewer$SongChordFilter(
 var key = cljs.core.first.call(null,cljs.core.nth.call(null,thisSong,thisIndex));
 var quality = cljs.core.second.call(null,cljs.core.nth.call(null,thisSong,thisIndex));
 return cljs.core.filter.call(null,((function (key,quality){
-return (function (p1__30838_SHARP_){
-return (cljs.core._EQ_.call(null,key,cljs.core.first.call(null,p1__30838_SHARP_))) && (cljs.core._EQ_.call(null,quality,cljs.core.second.call(null,p1__30838_SHARP_)));
+return (function (p1__30862_SHARP_){
+return (cljs.core._EQ_.call(null,key,cljs.core.first.call(null,p1__30862_SHARP_))) && (cljs.core._EQ_.call(null,quality,cljs.core.second.call(null,p1__30862_SHARP_)));
 });})(key,quality))
 ,collection);
 });
 tabber.songViewer.ChordPreviewList = (function tabber$songViewer$ChordPreviewList(){
-var songChords = cljs.core.into.call(null,cljs.core.PersistentHashSet.EMPTY,cljs.core.distinct.call(null,cljs.core.map.call(null,(function (p1__30839_SHARP_){
-return cljs.core.take.call(null,(2),p1__30839_SHARP_);
+var songChords = cljs.core.into.call(null,cljs.core.PersistentHashSet.EMPTY,cljs.core.distinct.call(null,cljs.core.map.call(null,(function (p1__30863_SHARP_){
+return cljs.core.take.call(null,(2),p1__30863_SHARP_);
 }),cljs.core.drop.call(null,(2),cljs.core.deref.call(null,tabber.state.song)))));
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),tabber.songViewer.ChordPreviewListStyle], null),cljs.core.map.call(null,tabber.chordChart.ChordChart,cljs.core.filter.call(null,((function (songChords){
-return (function (p1__30840_SHARP_){
-return cljs.core.contains_QMARK_.call(null,songChords,cljs.core.take.call(null,(2),p1__30840_SHARP_));
+return (function (p1__30864_SHARP_){
+return cljs.core.contains_QMARK_.call(null,songChords,cljs.core.take.call(null,(2),p1__30864_SHARP_));
 });})(songChords))
 ,cljs.core.deref.call(null,tabber.state.chords)))], null);
 });
 tabber.songViewer.CurrentChord = (function tabber$songViewer$CurrentChord(){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),tabber.songViewer.CurrentChordStyle], null),((cljs.core._EQ_.call(null,(1),cljs.core.deref.call(null,tabber.state.index)))?new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),tabber.songViewer.GetReadyStyle.call(null)], null),"Get Ready!"], null):cljs.core.map.call(null,tabber.chordChart.ChordChart,tabber.songViewer.SongChordFilter.call(null,cljs.core.deref.call(null,tabber.state.chords),cljs.core.deref.call(null,tabber.state.song),cljs.core.deref.call(null,tabber.state.index))))], null);
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),tabber.songViewer.CurrentChordStyle], null),((cljs.core._EQ_.call(null,(0),cljs.core.deref.call(null,tabber.state.index)))?new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),tabber.songViewer.GetReadyStyle.call(null)], null),"Get Ready!"], null):cljs.core.map.call(null,tabber.chordChart.ChordChart,tabber.songViewer.SongChordFilter.call(null,cljs.core.deref.call(null,tabber.state.chords),cljs.core.deref.call(null,tabber.state.song),cljs.core.deref.call(null,tabber.state.index))))], null);
 });
 tabber.songViewer.OnDeckChord = (function tabber$songViewer$OnDeckChord(num,upper){
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),tabber.songViewer.OnDeckChordStyle.call(null,upper)], null),((((num + cljs.core.deref.call(null,tabber.state.index)) < cljs.core.count.call(null,cljs.core.deref.call(null,tabber.state.song))))?cljs.core.map.call(null,tabber.chordChart.ChordChart,tabber.songViewer.SongChordFilter.call(null,cljs.core.deref.call(null,tabber.state.chords),cljs.core.deref.call(null,tabber.state.song),(num + cljs.core.deref.call(null,tabber.state.index)))):"")], null);
@@ -126,4 +126,4 @@ tabber.songViewer.SongPage = (function tabber$songViewer$SongPage(){
 return new cljs.core.PersistentVector(null, 10, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"position","position",-2011731912),"relative"], null)], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.SongTitle], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.TempoDisplay], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.CurrentChord], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.OnDeckChord,(1),"100px"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.OnDeckChord,(2),"300px"], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.BeatCounter], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.ChordPreviewList], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.songViewer.StartButton], null)], null);
 });
 
-//# sourceMappingURL=songViewer.js.map?rel=1500051637340
+//# sourceMappingURL=songViewer.js.map?rel=1500052801391

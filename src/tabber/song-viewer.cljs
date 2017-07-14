@@ -133,7 +133,7 @@
     
 (defn CurrentChord []
     [:div {:style CurrentChordStyle}
-        (if (= 1 @state/index)
+        (if (= 0 @state/index)
             [:div {:style (GetReadyStyle) } "Get Ready!"]
 		    (map chart/ChordChart (SongChordFilter @state/chords @state/song @state/index)))])
 
@@ -168,8 +168,6 @@
 		[OnDeckChord 1 "100px"]
         [OnDeckChord 2 "300px"]
         [BeatCounter]
-        ; [:div @state/song]
-        ; [:div @state/songTitle]
         [ChordPreviewList]
         [StartButton]])
 
