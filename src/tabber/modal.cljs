@@ -41,7 +41,6 @@
     (filter #(= title (first %)) songs/Songs) )
 
 (defn SongSelect []
-    (print "Yo" (SongTitles))
     [:select {:style {:width "200px" 
                         :height "25px" 
                         :fontSize "16px"
