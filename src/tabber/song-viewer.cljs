@@ -18,10 +18,18 @@
     :fontSize "80px" })
 
 (def CurrentChordStyle
-    {:transform "scale(1.5)" :width "1vw" :position "fixed" :top "200px" :left "calc(50% - 250px)" })
+    {:transform "scale(1.5)"
+    :willChange "transform" 
+    :width "1vw" 
+    :position "fixed" 
+    :top "200px" 
+    :left "calc(50% - 250px)" })
 
 (defn GetReadyStyle []
-    {:width "200px" :margin "70px 0 0 70px" :fontSize "30px" :color (color/ReturnColors :t1)})
+    {:width "200px" 
+    :margin "70px 0 0 70px" 
+    :fontSize "30px" 
+    :color (color/ReturnColors :t1)})
 
 (defn OnDeckChordStyle [upper]
     {:transform "scale(0.9)" 
@@ -81,16 +89,14 @@
 (defn FormatSong [songInfo]
     (swap! state/app-state assoc-in [:songTitle] (first (first songInfo)))
     (swap! state/app-state assoc-in [:tempo] (second (first songInfo)))
-    (as-> songInfo song
-        (first song)
-        (drop 2 song)
-        (map #(str/split % #" ") song)
-        (apply concat song)
-        (filter #(not (str/blank? %)) song)
-        (map #(str/split % #"/") song)
-        (cons ["X" "X" "4"] song)
-        (swap! state/app-state assoc-in [:song] song)))
-        ; (swap! state/app-state assoc-in [:song] (cons ["X" "X" "4"] (map #(str/split % #"/") (filter #(not (str/blank? % )) (apply concat (map #(str/split % #" ") (drop 2 (first songInfo)))))))))
+    (->> songInfo 
+        (first)
+        (drop 2)
+        (mapcat #(str/split % #" "))
+        (filter #(not (str/blank? %)))
+        (map #(str/split % #"/"))
+        (cons ["X" "X" "4"])
+        (swap! state/app-state assoc-in [:song])))
 
 (defn Tempo []
     (->> @state/tempo 
@@ -148,7 +154,7 @@
          @state/songTitle])
 
 (defn StartButton []
-    [:button {:on-click #(do (swap! state/app-state assoc-in [:index] 1) (StartBeatCounter)) 
+    [:button {:on-click #(do (swap! state/app-state assoc-in [:index] 0) (StartBeatCounter)) 
             :style (StartButtonStyle) } "START"])
 
 (defn TempoButton [operator]

@@ -18,4 +18,4 @@ tabber.core.on_js_reload = (function tabber$core$on_js_reload(){
 return null;
 });
 
-//# sourceMappingURL=core.js.map?rel=1500052801584
+//# sourceMappingURL=core.js.map?rel=1500064706148

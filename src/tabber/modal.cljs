@@ -3,7 +3,7 @@
               [tabber.songs :as songs]
               [tabber.songViewer :as songViewer]
               [tabber.colorThemes :as color]))
-(enable-console-print!)
+
 (defn ModalIcon []
     [:div {:style {:position "fixed"
                     :top "25px"
@@ -50,7 +50,9 @@
                         :background "#333" 
                         :-webkitAppearance "none" 
                         :border "1px solid #fff"}
-                :on-change #(songViewer/FormatSong (GrabSongByTitle(-> % .-target .-value)))}
+                :on-change #(do (songViewer/FormatSong (GrabSongByTitle(-> % .-target .-value))) 
+                                (swap! state/app-state assoc-in [:index] 0)
+                                (swap! state/app-state assoc-in [:beat] 0))}
         (map #(do [:option {:value %} %]) (SongTitles))])
 
 (defn PageSelector [page]
