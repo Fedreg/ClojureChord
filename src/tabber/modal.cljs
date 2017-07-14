@@ -1,7 +1,9 @@
 (ns tabber.modal
     (:require [tabber.state :as state]
+              [tabber.songs :as songs]
+              [tabber.songViewer :as songViewer]
               [tabber.colorThemes :as color]))
-
+(enable-console-print!)
 (defn ModalIcon []
     [:div {:style {:position "fixed"
                     :top "25px"
@@ -32,6 +34,25 @@
         [:option {:value "contrast"} "Contrast"]
         [:option {:value "light"} "Light"]])
 
+(defn SongTitles []
+    (map #(first %) songs/Songs))
+
+(defn GrabSongByTitle [title]
+    (filter #(= title (first %)) songs/Songs) )
+
+(defn SongSelect []
+    (print "Yo" (SongTitles))
+    [:select {:style {:width "200px" 
+                        :height "25px" 
+                        :fontSize "16px"
+                        :color "#fff" 
+                        :paddingLeft "20px"
+                        :background "#333" 
+                        :-webkitAppearance "none" 
+                        :border "1px solid #fff"}
+                :on-change #(songViewer/FormatSong (GrabSongByTitle(-> % .-target .-value)))}
+        (map #(do [:option {:value %} %]) (SongTitles))])
+
 (defn PageSelector [page]
     [:div {:style { :margin "20px 50px"
                 :textDecoration "none" 
@@ -54,6 +75,7 @@
         [:div "Select Theme"]
         [ThemeSelect]
         [:div [PageSelector "Chord Charts"]]
-        [:div [PageSelector "Song Player"]]])
+        [:div [PageSelector "Song Player"]]
+        [SongSelect]])
 
 

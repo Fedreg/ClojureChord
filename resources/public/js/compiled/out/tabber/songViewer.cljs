@@ -2,21 +2,9 @@
     (:require [tabber.state :as state]
               [tabber.colorThemes :as color]
               [tabber.chordChart :as chart]
-              [reagent.core :as reagent :refer [cursor]]
               [clojure.string :as str]))
 
 (enable-console-print!)
-
-;----------------------------------
-; Cursors
-;----------------------------------
-
-(def !beat (cursor state/app-state [:beat]))
-(def !index (cursor state/app-state [:index]))
-(def !song (cursor state/app-state [:song]))
-(def !tempo (cursor state/app-state [:tempo]))
-(def !chords (cursor state/app-state [:chords]))
-(def !rawSong (cursor state/app-state [:rawSong]))
 
 ;----------------------------------
 ; Component Styles 
@@ -90,32 +78,38 @@
 ;---------------------------------------------
 
 ; Converts song data from string to list of vectors
-(defn FormatSong []
-    (as-> @!rawSong song
-        (str/split song #" ")
-        (filter #(not (empty? %)) song)
+(defn FormatSong [songInfo]
+    (swap! state/app-state assoc-in [:songTitle] (first (first songInfo)))
+    (swap! state/app-state assoc-in [:tempo] (second (first songInfo)))
+    (as-> songInfo song
+        (first song)
+        (drop 2 song)
+        (map #(str/split % #" ") song)
+        (apply concat song)
+        (filter #(not (str/blank? %)) song)
         (map #(str/split % #"/") song)
         (cons ["X" "X" "4"] song)
-        (reset! state/app-state assoc-in [:song] song)))
+        (swap! state/app-state assoc-in [:song] song)))
+        ; (swap! state/app-state assoc-in [:song] (cons ["X" "X" "4"] (map #(str/split % #"/") (filter #(not (str/blank? % )) (apply concat (map #(str/split % #" ") (drop 2 (first songInfo)))))))))
 
 (defn Tempo []
-    (->> @!tempo 
+    (->> @state/tempo 
         (/ 60)
         (* 1000)))
 
 (defn StartBeatCounter []
     (let [numberOfBeats (->>
-                            (nth @!song @!index)
+                            (nth @state/song @state/index)
                             (last)
                             (js/parseInt)
                             (inc))]
-    (if (< @!beat numberOfBeats)
+    (if (< @state/beat numberOfBeats)
         (js/setTimeout #((swap! state/app-state update-in [:beat] inc) (StartBeatCounter)) (Tempo))
         ((swap! state/app-state assoc-in [:beat] 1) (swap! state/app-state update-in [:index] inc) (StartBeatCounter)))))
 
 (defn BeatCounter []
-    @!beat
-    (let [range (->> (nth @!song @!index)
+    @state/beat
+    (let [range (->> (nth @state/song @state/index)
                     (last)
                     (js/parseInt)
                     (inc)
@@ -123,35 +117,35 @@
     [:div {:style BeatCounterStyle}
         (map 
             (fn [e] [:div {:style {:paddingLeft "20px" 
-                                    :color (if (= e @!beat) (color/ReturnColors :f1) (color/ReturnColors :t2) )}} e]) range)]))
+                                    :color (if (= e @state/beat) (color/ReturnColors :f1) (color/ReturnColors :t2) )}} e]) range)]))
 
 (defn SongChordFilter [collection thisSong thisIndex]
 	(let [key (first (nth thisSong thisIndex)) quality (second (nth thisSong thisIndex))]
 		(filter #(and (= key (first %)) (= quality (second %))) collection)))
 
 (defn ChordPreviewList []
-    (let [songChords (->> @!song
+    (let [songChords (->> @state/song
             (drop 2)
             (map #(take 2 %))
             (distinct)
             (into #{}))]
-        [:div {:style ChordPreviewListStyle } (map chart/ChordChart (filter #(contains? songChords (take 2 %)) @!chords))]))
+        [:div {:style ChordPreviewListStyle } (map chart/ChordChart (filter #(contains? songChords (take 2 %)) @state/chords))]))
     
 (defn CurrentChord []
     [:div {:style CurrentChordStyle}
-        (if (= 1 @!index)
+        (if (= 1 @state/index)
             [:div {:style (GetReadyStyle) } "Get Ready!"]
-		    (map chart/ChordChart (SongChordFilter @!chords @!song @!index)))])
+		    (map chart/ChordChart (SongChordFilter @state/chords @state/song @state/index)))])
 
 (defn OnDeckChord [num upper]
     [:div {:style (OnDeckChordStyle upper) }
-			(if (< (+ num @!index) (count @!song))
-				(map chart/ChordChart (SongChordFilter @!chords @!song (+ num @!index)))
+			(if (< (+ num @state/index) (count @state/song))
+				(map chart/ChordChart (SongChordFilter @state/chords @state/song (+ num @state/index)))
 				"")])
 
 (defn SongTitle []
     [:h1 {:style (SongTitleStyle) } 
-         (nth @!song 0)])
+         @state/songTitle])
 
 (defn StartButton []
     [:button {:on-click #(do (swap! state/app-state assoc-in [:index] 1) (StartBeatCounter)) 
@@ -163,7 +157,7 @@
 (defn TempoDisplay []
     [:div {:style (TempoDisplayStyle) }
         [TempoButton -]
-        [:div "BPM: " @!tempo]
+        [:div "BPM: " @state/tempo]
         [TempoButton +]])
                 
 (defn SongPage []
@@ -174,6 +168,8 @@
 		[OnDeckChord 1 "100px"]
         [OnDeckChord 2 "300px"]
         [BeatCounter]
+        ; [:div @state/song]
+        ; [:div @state/songTitle]
         [ChordPreviewList]
         [StartButton]])
 

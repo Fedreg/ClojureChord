@@ -1,20 +1,15 @@
 (ns tabber.chordChart
-    (:require [reagent.core :as reagent :refer [cursor]]
-			  [tabber.state :as state]
+    (:require [tabber.state :as state]
               [tabber.colorThemes :as color]))
 
 
 ;-------------------------------------
-; Cursors and Function Declarations
+; Function Declarations
 ;-------------------------------------
 
 (declare fretX)
 (declare fretY)
 (declare fingerColor)
-
-(def !key (cursor state/app-state [:key]))
-(def !quality (cursor state/app-state [:quality]))
-(def !chords (cursor state/app-state [:chords]))
 
 ;-------------------------------------
 ; Component Styles
@@ -84,9 +79,9 @@
 	:fontSize "20px"
 	:padding "5px"
 	:border "1px solid #555"
-	:color (if (= key @!key) (color/ReturnColors :t1) (color/ReturnColors :t2))
+	:color (if (= key @state/musKey) (color/ReturnColors :t1) (color/ReturnColors :t2))
 	:cursor "pointer"
-	:backgroundColor (if (= key @!key) (color/ReturnColors :f1) "rgba(0,0,0,0)")})
+	:backgroundColor (if (= key @state/musKey) (color/ReturnColors :f1) "rgba(0,0,0,0)")})
 
 (defn QualityButtonStyle [quality]
 	{:width "30px" 
@@ -95,9 +90,9 @@
 	:fontSize "14px"
 	:padding "5px"
 	:border "1px solid #555"
-	:color (if (= quality @!quality) (color/ReturnColors :t1) (color/ReturnColors :t2))
+	:color (if (= quality @state/quality) (color/ReturnColors :t1) (color/ReturnColors :t2))
 	:cursor "pointer"
-	:backgroundColor (if (= quality @!quality) (color/ReturnColors :f1) "rgba(0,0,0,0)")} )
+	:backgroundColor (if (= quality @state/quality) (color/ReturnColors :f1) "rgba(0,0,0,0)")} )
 
 ;--------------------------------------------------
 ; Components
@@ -192,14 +187,15 @@
 
 (defn KeyFilter [collection]
 	(cond 
-		(and (= @!key "All") (= @!quality "All")) collection
-		(= @!key "All") (filter #(= (second %) @!quality) collection)
-		(= @!quality "All") (filter #(= (first %) @!key) collection)
-			:else (filter #(and (= (first  %) @!key) (= (second %) @!quality)) collection)))	
+		(and (= @state/musKey "All") (= @state/quality "All")) collection
+		(= @state/musKey "All") (filter #(= (second %) @state/quality) collection)
+		(= @state/quality "All") (filter #(= (first %) @state/musKey) collection)
+			:else (filter #(and (= (first  %) @state/musKey) (= (second %) @state/quality)) collection)))	
 
 (defn ChordChartPage []
 	[:div
 		(map KeyButton keyList)
 		[:div (map QualityButton qualityList)]
+		; [:div {:style {:color (color/ReturnColors :t1) }} state/song state/songTitle state/tempo]
 		[:div {:style{:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "50px"}}
-			(map ChordChart (KeyFilter @!chords))]])
+			(map ChordChart (KeyFilter @state/chords))]])
