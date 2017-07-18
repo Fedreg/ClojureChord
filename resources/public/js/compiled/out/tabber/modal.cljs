@@ -38,10 +38,9 @@
     (map #(first %) songs/Songs))
 
 (defn GrabSongByTitle [title]
-    (filter #(= title (first %)) songs/Songs) )
+    (first (filter #(= title (first %)) songs/Songs)))
 
 (defn SongSelect []
-    (print "Yo" (SongTitles))
     [:select {:style {:width "200px" 
                         :height "25px" 
                         :fontSize "16px"
@@ -53,7 +52,7 @@
                 :on-change #(do (songViewer/FormatSong (GrabSongByTitle(-> % .-target .-value))) 
                                 (swap! state/app-state assoc-in [:index] 0)
                                 (swap! state/app-state assoc-in [:beat] 0))}
-        (map #(do [:option {:value %} %]) (SongTitles))])
+        (map #(do [:option {:id % :value %} %]) (SongTitles))])
 
 (defn PageSelector [page]
     [:div {:style { :margin "20px 50px"

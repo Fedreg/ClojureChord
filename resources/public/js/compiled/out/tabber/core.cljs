@@ -10,7 +10,7 @@
 
 
 (defn Chords []
-	[:div {:style{ :marginTop "100px" :textAlign "center"}}
+	[:div {:style{ :marginTop "100px" :textAlign "center"} :id "chords"}
 		[modal/ModalIcon]
 		[modal/Modal]
 		(cond

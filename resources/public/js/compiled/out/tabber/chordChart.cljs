@@ -1,5 +1,6 @@
 (ns tabber.chordChart
-    (:require [tabber.state :as state]
+	(:require [tabber.state :as state]
+		      [cljs.spec.alpha :as s]
               [tabber.colorThemes :as color]))
 
 
@@ -102,8 +103,8 @@
 (defn ChangeBackgroundColor []
 	(set! js/document.body.style.backgroundColor (color/ReturnColors :bcgrnd)))
 
-; Symbol -> String
 (defn fretX [string]
+	(s/valid? int? string)
   	(cond 
 		(= :e6 string) "-10px"
 		(= :a string) "20px"
@@ -113,8 +114,8 @@
 		(= :e string) "140px"
 			:else "0"))
 
-; String -> String
 (defn fretY [fret]
+	(s/valid? int? fret)
 	(cond 
 		(= "0" fret) "-30px" 
 		(= "1" fret) "15px"
@@ -155,7 +156,7 @@
 ; String -> Html
 (defn ChordChart [chord]
 	(let [[chordName quality e6 a d g b e bar] chord]
-		[:div {:style (ChordChartStyle) }
+		[:div {:style (ChordChartStyle) :id (rand-int 1000) }
 		[:div {:style (ChordChartNameStyle) } (str chordName quality)]
 		[HorizontalStrings]
 		[Nut]

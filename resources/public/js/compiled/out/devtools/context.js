@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.9.229 {}
+// Compiled by ClojureScript 1.9.671 {}
 goog.provide('devtools.context');
 goog.require('cljs.core');
 devtools.context.get_root = (function devtools$context$get_root(){
@@ -9,4 +9,4 @@ return null;
 }
 });
 
-//# sourceMappingURL=context.js.map?rel=1500064915322
+//# sourceMappingURL=context.js.map?rel=1500333151279
