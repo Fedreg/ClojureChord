@@ -94,17 +94,18 @@
 
 (defn FormatSong [songInfo]
   "Converts song data from [string int string] to list of chords, title, & tempo"
-  (when (s/conform ::songInfo songInfo)
-    (swap! state/app-state assoc-in [:songTitle] (first songInfo))
-    (swap! state/app-state assoc-in [:tempo] (second songInfo))
-    (->> songInfo
-        (drop 2) 
-        (mapcat #(str/split % #" "))
-        (filter #(not (str/blank? %)))
-        (map #(str/split % #"/"))
-        (cons ["X" "X" "4"])
-        (swap! state/app-state assoc-in [:song]))))
-        
+  (if (s/valid? ::songInfo songInfo)
+    (do (swap! state/app-state assoc-in [:songTitle] (first songInfo))
+        (swap! state/app-state assoc-in [:tempo] (second songInfo))
+        (->> songInfo
+             (drop 2)
+             (mapcat #(str/split % #" "))
+             (filter #(not (str/blank? %)))
+             (map #(str/split % #"/"))
+             (cons ["X" "X" "4"])
+             (swap! state/app-state assoc-in [:song])))
+    (js/alert (str (first songInfo) " is not properly formatted!"))))
+
 (defn Tempo []
   (->> @state/tempo
        (/ 60)
@@ -131,7 +132,7 @@
      (map
       (fn [e] [:div {:style {:paddingLeft "20px"
                              :color (if (= e @state/beat) (color/ReturnColors :f1) (color/ReturnColors :t2))}
-                             :id (rand-int 1000)} e]) range)]))
+                     :id (rand-int 1000)} e]) range)]))
 
 (defn SongChordFilter [collection thisSong thisIndex]
   (let [key (first (nth thisSong thisIndex)) quality (second (nth thisSong thisIndex))]
@@ -159,7 +160,7 @@
      "")])
 
 (s/fdef OnDeckChord
-  :args (s/cat :num int? :upper string?))
+        :args (s/cat :num int? :upper string?))
 
 (defn SongTitle []
   [:h1 {:style (SongTitleStyle)}

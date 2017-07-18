@@ -94,16 +94,17 @@
 
 (defn FormatSong [songInfo]
   "Converts song data from [string int string] to list of chords, title, & tempo"
-  (when (s/conform ::songInfo songInfo)
-    (swap! state/app-state assoc-in [:songTitle] (first songInfo))
-    (swap! state/app-state assoc-in [:tempo] (second songInfo))
-    (->> songInfo
-         (drop 2)
-         (mapcat #(str/split % #" "))
-         (filter #(not (str/blank? %)))
-         (map #(str/split % #"/"))
-         (cons ["X" "X" "4"])
-         (swap! state/app-state assoc-in [:song]))))
+  (if (s/valid? ::songInfo songInfo)
+    (do (swap! state/app-state assoc-in [:songTitle] (first songInfo))
+        (swap! state/app-state assoc-in [:tempo] (second songInfo))
+        (->> songInfo
+             (drop 2)
+             (mapcat #(str/split % #" "))
+             (filter #(not (str/blank? %)))
+             (map #(str/split % #"/"))
+             (cons ["X" "X" "4"])
+             (swap! state/app-state assoc-in [:song])))
+    (js/alert (str (first songInfo) " is not properly formatted!"))))
 
 (defn Tempo []
   (->> @state/tempo

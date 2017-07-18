@@ -4,11 +4,19 @@
             [tabber.songs :as songs]
             [tabber.chords :as chords]))
 
+;----------------------------------
+; Initial State Items
+;----------------------------------
+
 (def InitSong '(["X" "X" 4]
                 ["D" "M" "4"] ["A" "M" "4"] ["A" "7" "4"] ["D" "M" "4"] ["G" "M" "4"] ["D" "M" "4"] ["A" "7" "4"] ["D" "M" "4"]
                 ["D" "M" "4"] ["A" "M" "4"] ["A" "7" "4"] ["D" "M" "4"] ["G" "M" "4"] ["D" "M" "4"] ["A" "7" "4"] ["D" "M" "4"]
                 ["D" "7" "4"] ["G" "M" "2"] ["D" "M" "2"] ["E" "m" "4"] ["A" "7" "4"] ["D" "M" "4"]
                 ["D" "7" "4"] ["G" "M" "2"] ["D" "M" "2"] ["E" "m" "4"] ["A" "7" "4"] ["D" "M" "4"]))
+
+;---------------------------------
+; State
+;---------------------------------
 
 (defonce app-state (atom {:chords chords/chordList
                           :key "A"
@@ -18,10 +26,13 @@
                           :index 0
                           :songTitle "Hey Jude"
                           :song InitSong
-                          :rawSong (get-in songs/Songs [2 :title])
                           :currentPage "Chord Charts"
                           :tempo 80
                           :colors "dark"}))
+
+;----------------------------------
+; Cursors
+;----------------------------------
 
 (def musKey (cursor app-state [:key]))
 (def quality (cursor app-state [:quality]))
@@ -31,4 +42,4 @@
 (def song (cursor app-state [:song]))
 (def songTitle (cursor app-state [:songTitle]))
 (def tempo (cursor app-state [:tempo]))
-(def rawSong (cursor app-state [:rawSong]))
+(def colors (cursor app-state [:colors]))

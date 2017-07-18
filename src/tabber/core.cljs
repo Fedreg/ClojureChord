@@ -20,9 +20,5 @@
 (reagent/render-component [Chords]
                           (. js/document (getElementById "app")))
 
-(defn on-js-reload [])
-	; (song/FormatSong)
-  ;; optionally touch your state/app-state to force rerendering depending on
-  ;; your application
-  ;; (swap! state/app-state update-in [:__figwheel_counter] inc)
+; (defn on-js-reload [])
 

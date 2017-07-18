@@ -14,8 +14,5 @@ return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMP
 ))], null);
 });
 reagent.core.render_component.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.core.Chords], null),document.getElementById("app"));
-tabber.core.on_js_reload = (function tabber$core$on_js_reload(){
-return null;
-});
 
-//# sourceMappingURL=core.js.map?rel=1500335852903
+//# sourceMappingURL=core.js.map?rel=1500403420196

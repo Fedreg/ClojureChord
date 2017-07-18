@@ -9,6 +9,7 @@ goog.addDependency("../clojure/set.js", ['clojure.set'], ['cljs.core']);
 goog.addDependency("../clojure/data.js", ['clojure.data'], ['cljs.core', 'clojure.set']);
 goog.addDependency("../devtools/prefs.js", ['devtools.prefs'], ['cljs.core', 'devtools.defaults']);
 goog.addDependency("../devtools/util.js", ['devtools.util'], ['cljs.core', 'devtools.version', 'goog.userAgent', 'cljs.pprint', 'devtools.context', 'devtools.defaults', 'clojure.data', 'devtools.prefs']);
+goog.addDependency("../devtools/reporter.js", ['devtools.reporter'], ['devtools.util', 'cljs.core']);
 goog.addDependency("../devtools/protocols.js", ['devtools.protocols'], ['cljs.core']);
 goog.addDependency("../devtools/format.js", ['devtools.format'], ['cljs.core', 'devtools.context']);
 goog.addDependency("../devtools/munging.js", ['devtools.munging'], ['devtools.util', 'cljs.core', 'goog.object', 'goog.string.StringBuffer', 'devtools.context', 'clojure.string']);
@@ -18,7 +19,6 @@ goog.addDependency("../devtools/formatters/printing.js", ['devtools.formatters.p
 goog.addDependency("../clojure/walk.js", ['clojure.walk'], ['cljs.core']);
 goog.addDependency("../devtools/formatters/templating.js", ['devtools.formatters.templating'], ['devtools.formatters.helpers', 'devtools.formatters.state', 'devtools.util', 'cljs.core', 'devtools.protocols', 'cljs.pprint', 'clojure.string', 'clojure.walk']);
 goog.addDependency("../devtools/formatters/markup.js", ['devtools.formatters.markup'], ['devtools.formatters.helpers', 'devtools.formatters.printing', 'devtools.formatters.templating', 'devtools.formatters.state', 'cljs.core', 'devtools.munging']);
-goog.addDependency("../devtools/reporter.js", ['devtools.reporter'], ['devtools.util', 'cljs.core']);
 goog.addDependency("../devtools/formatters/budgeting.js", ['devtools.formatters.budgeting'], ['devtools.formatters.helpers', 'devtools.formatters.markup', 'devtools.formatters.templating', 'devtools.formatters.state', 'cljs.core']);
 goog.addDependency("../devtools/formatters/core.js", ['devtools.formatters.core'], ['devtools.formatters.helpers', 'devtools.formatters.markup', 'devtools.formatters.templating', 'devtools.formatters.state', 'cljs.core', 'devtools.reporter', 'devtools.protocols', 'devtools.formatters.budgeting', 'devtools.format', 'devtools.prefs']);
 goog.addDependency("../devtools/toolbox.js", ['devtools.toolbox'], ['devtools.formatters.markup', 'devtools.formatters.templating', 'cljs.core', 'devtools.protocols']);

@@ -20,4 +20,4 @@
              "A/m7/4 D/7/4 G/M7/4 C/M7/4 F#/m7/4 B/7/4 E/m/4 E/m/4 
              A/m7/4 D/7/4 G/M7/4 C/M7/4 F#/m7/4 B/7/4 E/m/4 E/m/4"]
 
-            ["Test Song" 900 90 "Dogs"]])
+            ["Test Song (bad)" 900 90 "Dogs"]])

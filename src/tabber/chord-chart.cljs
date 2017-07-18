@@ -4,12 +4,18 @@
             [tabber.colorThemes :as color]))
 
 ;-------------------------------------
-; Function Declarations
+; Function Declarations & Specs
 ;-------------------------------------
 
 (declare fretX)
 (declare fretY)
 (declare fingerColor)
+
+(s/def ::chordName string?)
+(s/def ::quality string?)
+(s/def ::bar (s/or ::fret int? ::empty nil?))
+(s/def ::string keyword?)
+(s/def ::note (s/or ::fret int?  ::empty string?))
 
 ;-------------------------------------
 ; Component Styles
@@ -98,12 +104,8 @@
 ; Components
 ;--------------------------------------------------
 
-; Sets body color.  Temporary until more permanent stylesheet is created.
-(defn ChangeBackgroundColor []
-  (set! js/document.body.style.backgroundColor (color/ReturnColors :bcgrnd)))
-
 (defn fretX [string]
-  (s/valid? int? string)
+  "Determines vertical position of chord chart finger marker."
   (cond
     (= :e6 string) "-10px"
     (= :a string) "20px"
@@ -114,7 +116,7 @@
     :else "0"))
 
 (defn fretY [fret]
-  (s/valid? int? fret)
+  "Determines horizontal position of chord chart finger marker."
   (cond
     (= "0" fret) "-30px"
     (= "1" fret) "15px"
@@ -123,9 +125,8 @@
     (= "4" fret) "165px"
     :else "-30px"))
 
-; String -> String
 (defn fingerColor [finger]
-  (ChangeBackgroundColor)
+  "Sets the color of each chord chart marker by finger."
   (cond
     (= "1" finger) (color/ReturnColors :f1)
     (= "2" finger) (color/ReturnColors :f2)
@@ -133,13 +134,14 @@
     (= "4" finger) (color/ReturnColors :f4)
     :else (color/ReturnColors :fx)))
 
-; Symbol -> Int -> Html
 (defn FretFingerMarker [string notes]
-  (let [[fret finger] (str notes 0)]
-    [:div {:style (FretFingerMarkerStyle string fret finger)} finger]))
+  "Draws each dot on the chord chart."
+  (when (and (s/valid? ::string string) (s/valid? ::note notes))
+    (let [[fret finger] (str notes 0)]
+      [:div {:style (FretFingerMarkerStyle string fret finger)} finger])))
 
-; Html
 (defn HorizontalStrings []
+  "Draws the 'strings' for the chord chart."
   [:div
    [:hr {:style (HorizontalStringsStyle "30px")}]
    [:hr {:style (HorizontalStringsStyle "28px")}]
@@ -147,34 +149,48 @@
    [:hr {:style (HorizontalStringsStyle "28px")}]])
 
 (defn VerticalFretLine [Yoffset]
+  "Draws the vertical fret lines"
   [:div {:style (VerticalFretlineStyle Yoffset)}])
 
 (defn Nut []
+  "Draws the thick vertical bar (called a 'nut') on right side of each chord chart."
   [:div {:style (NutStyle)}])
 
-; String -> Html
 (defn ChordChart [chord]
+  "Main chord chart component."
   (let [[chordName quality e6 a d g b e bar] chord]
-    [:div {:style (ChordChartStyle) :id (rand-int 1000)}
-     [:div {:style (ChordChartNameStyle)} (str chordName quality)]
-     [HorizontalStrings]
-     [Nut]
-     [VerticalFretLine "50px"]
-     [VerticalFretLine "100px"]
-     [VerticalFretLine "150px"]
-     [FretFingerMarker :e6 e6]
-     [FretFingerMarker :a a]
-     [FretFingerMarker :d d]
-     [FretFingerMarker :g g]
-     [FretFingerMarker :b b]
-     [FretFingerMarker :e e]
-     [:div {:style (ChordChartBarStyle)} (if (not (= nil bar)) (str "bar " bar) "")]]))
+	(when (and
+		(s/valid? ::chordName chordName)
+		(s/valid? ::quality quality)
+		(s/valid? ::note e6)
+		(s/valid? ::note a)
+		(s/valid? ::note d)
+		(s/valid? ::note g)
+		(s/valid? ::note b)
+		(s/valid? ::note e)
+		(s/valid? ::bar bar))
+		[:div {:style (ChordChartStyle) :id (rand-int 1000)}
+		[:div {:style (ChordChartNameStyle)} (str chordName quality)]
+		[HorizontalStrings]
+		[Nut]
+		[VerticalFretLine "50px"]
+		[VerticalFretLine "100px"]
+		[VerticalFretLine "150px"]
+		[FretFingerMarker :e6 e6]
+		[FretFingerMarker :a a]
+		[FretFingerMarker :d d]
+		[FretFingerMarker :g g]
+		[FretFingerMarker :b b]
+		[FretFingerMarker :e e]
+		[:div {:style (ChordChartBarStyle)} (if (not (= nil bar)) (str "bar " bar) "")]])))
 
 (defn KeyButton [key]
+  "The button that select key.  i.e. A B C D etc."
   [:button {:style (KeyButtonStyle key)
             :on-click (fn [e] (swap! state/app-state assoc-in [:key] key))} key])
 
 (defn QualityButton [quality]
+  "The buttons that select chord type. i.e. M m 6 7 etc."
   [:button {:style (QualityButtonStyle quality)
             :on-click (fn [e] (swap! state/app-state assoc-in [:quality] quality))} quality])
 
@@ -185,6 +201,7 @@
   ["All" "M" "m" "6" "7" "M7" "m7"])
 
 (defn KeyFilter [collection]
+  "Returns chords to display based on which keys and qualities selected."
   (cond
     (and (= @state/musKey "All") (= @state/quality "All")) collection
     (= @state/musKey "All") (filter #(= (second %) @state/quality) collection)
@@ -195,6 +212,5 @@
   [:div
    (map KeyButton keyList)
    [:div (map QualityButton qualityList)]
-		; [:div {:style {:color (color/ReturnColors :t1) }} state/song state/songTitle state/tempo]
    [:div {:style {:display "flex" :justifyContent "center" :flexWrap "wrap" :marginTop "50px"}}
     (map ChordChart (KeyFilter @state/chords))]])
