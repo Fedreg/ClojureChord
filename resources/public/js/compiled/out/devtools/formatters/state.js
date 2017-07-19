@@ -1,9 +1,9 @@
-// Compiled by ClojureScript 1.9.229 {}
+// Compiled by ClojureScript 1.9.671 {}
 goog.provide('devtools.formatters.state');
 goog.require('cljs.core');
 devtools.formatters.state._STAR_current_state_STAR_ = null;
 devtools.formatters.state.valid_current_state_QMARK_ = (function devtools$formatters$state$valid_current_state_QMARK_(){
-return cljs.core.some_QMARK_.call(null,devtools.formatters.state._STAR_current_state_STAR_);
+return !((devtools.formatters.state._STAR_current_state_STAR_ == null));
 });
 devtools.formatters.state.get_default_state = (function devtools$formatters$state$get_default_state(){
 return cljs.core.PersistentArrayMap.EMPTY;
@@ -17,23 +17,23 @@ throw (new Error("Assert failed: (valid-current-state?)"));
 return devtools.formatters.state._STAR_current_state_STAR_;
 });
 devtools.formatters.state.update_current_state_BANG_ = (function devtools$formatters$state$update_current_state_BANG_(var_args){
-var args__27061__auto__ = [];
-var len__27054__auto___73799 = arguments.length;
-var i__27055__auto___73800 = (0);
+var args__29809__auto__ = [];
+var len__29802__auto___38610 = arguments.length;
+var i__29803__auto___38611 = (0);
 while(true){
-if((i__27055__auto___73800 < len__27054__auto___73799)){
-args__27061__auto__.push((arguments[i__27055__auto___73800]));
+if((i__29803__auto___38611 < len__29802__auto___38610)){
+args__29809__auto__.push((arguments[i__29803__auto___38611]));
 
-var G__73801 = (i__27055__auto___73800 + (1));
-i__27055__auto___73800 = G__73801;
+var G__38612 = (i__29803__auto___38611 + (1));
+i__29803__auto___38611 = G__38612;
 continue;
 } else {
 }
 break;
 }
 
-var argseq__27062__auto__ = ((((1) < args__27061__auto__.length))?(new cljs.core.IndexedSeq(args__27061__auto__.slice((1)),(0),null)):null);
-return devtools.formatters.state.update_current_state_BANG_.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),argseq__27062__auto__);
+var argseq__29810__auto__ = ((((1) < args__29809__auto__.length))?(new cljs.core.IndexedSeq(args__29809__auto__.slice((1)),(0),null)):null);
+return devtools.formatters.state.update_current_state_BANG_.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),argseq__29810__auto__);
 });
 
 devtools.formatters.state.update_current_state_BANG_.cljs$core$IFn$_invoke$arity$variadic = (function (f,args){
@@ -47,10 +47,10 @@ return devtools.formatters.state._STAR_current_state_STAR_ = cljs.core.apply.cal
 
 devtools.formatters.state.update_current_state_BANG_.cljs$lang$maxFixedArity = (1);
 
-devtools.formatters.state.update_current_state_BANG_.cljs$lang$applyTo = (function (seq73797){
-var G__73798 = cljs.core.first.call(null,seq73797);
-var seq73797__$1 = cljs.core.next.call(null,seq73797);
-return devtools.formatters.state.update_current_state_BANG_.cljs$core$IFn$_invoke$arity$variadic(G__73798,seq73797__$1);
+devtools.formatters.state.update_current_state_BANG_.cljs$lang$applyTo = (function (seq38608){
+var G__38609 = cljs.core.first.call(null,seq38608);
+var seq38608__$1 = cljs.core.next.call(null,seq38608);
+return devtools.formatters.state.update_current_state_BANG_.cljs$core$IFn$_invoke$arity$variadic(G__38609,seq38608__$1);
 });
 
 devtools.formatters.state.push_object_to_current_history_BANG_ = (function devtools$formatters$state$push_object_to_current_history_BANG_(object){
@@ -62,8 +62,8 @@ return new cljs.core.Keyword(null,"history","history",-247395220).cljs$core$IFn$
 devtools.formatters.state.is_circular_QMARK_ = (function devtools$formatters$state$is_circular_QMARK_(object){
 var history = devtools.formatters.state.get_current_history.call(null);
 return cljs.core.some.call(null,((function (history){
-return (function (p1__73802_SHARP_){
-return (p1__73802_SHARP_ === object);
+return (function (p1__38613_SHARP_){
+return (p1__38613_SHARP_ === object);
 });})(history))
 ,history);
 });
@@ -71,7 +71,7 @@ devtools.formatters.state.prevent_recursion_QMARK_ = (function devtools$formatte
 return cljs.core.boolean$.call(null,new cljs.core.Keyword(null,"prevent-recursion","prevent-recursion",-1498371606).cljs$core$IFn$_invoke$arity$1(devtools.formatters.state.get_current_state.call(null)));
 });
 devtools.formatters.state.set_prevent_recursion = (function devtools$formatters$state$set_prevent_recursion(state,val){
-if(cljs.core.some_QMARK_.call(null,val)){
+if(!((val == null))){
 return cljs.core.assoc.call(null,state,new cljs.core.Keyword(null,"prevent-recursion","prevent-recursion",-1498371606),val);
 } else {
 return cljs.core.dissoc.call(null,state,new cljs.core.Keyword(null,"prevent-recursion","prevent-recursion",-1498371606));
@@ -81,7 +81,7 @@ devtools.formatters.state.get_managed_print_level = (function devtools$formatter
 return new cljs.core.Keyword(null,"managed-print-level","managed-print-level",-844058473).cljs$core$IFn$_invoke$arity$1(devtools.formatters.state.get_current_state.call(null));
 });
 devtools.formatters.state.set_managed_print_level = (function devtools$formatters$state$set_managed_print_level(state,val){
-if(cljs.core.some_QMARK_.call(null,val)){
+if(!((val == null))){
 return cljs.core.assoc.call(null,state,new cljs.core.Keyword(null,"managed-print-level","managed-print-level",-844058473),val);
 } else {
 return cljs.core.dissoc.call(null,state,new cljs.core.Keyword(null,"managed-print-level","managed-print-level",-844058473));
@@ -91,7 +91,7 @@ devtools.formatters.state.get_depth_budget = (function devtools$formatters$state
 return new cljs.core.Keyword(null,"depth-budget","depth-budget",-335905888).cljs$core$IFn$_invoke$arity$1(devtools.formatters.state.get_current_state.call(null));
 });
 devtools.formatters.state.set_depth_budget = (function devtools$formatters$state$set_depth_budget(state,val){
-if(cljs.core.some_QMARK_.call(null,val)){
+if(!((val == null))){
 return cljs.core.assoc.call(null,state,new cljs.core.Keyword(null,"depth-budget","depth-budget",-335905888),val);
 } else {
 return cljs.core.dissoc.call(null,state,new cljs.core.Keyword(null,"depth-budget","depth-budget",-335905888));
@@ -101,4 +101,4 @@ devtools.formatters.state.reset_depth_limits = (function devtools$formatters$sta
 return devtools.formatters.state.set_managed_print_level.call(null,devtools.formatters.state.set_depth_budget.call(null,state,null),null);
 });
 
-//# sourceMappingURL=state.js.map?rel=1499924887685
+//# sourceMappingURL=state.js.map?rel=1500449676995
