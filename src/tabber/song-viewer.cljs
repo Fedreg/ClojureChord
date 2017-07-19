@@ -67,7 +67,7 @@
    :width "100px"
    :height "40px"
    :fontSize "24px"
-   :color (color/ReturnColors :t1)
+   :color (if (= false @state/songPlaying) (color/ReturnColors :t1) (color/ReturnColors :t2))
    :border "1px solid #777"})
 
 (defn TempoButtonStyle []
@@ -107,21 +107,25 @@
     (js/alert (str (first songInfo) " is not properly formatted!"))))
 
 (defn Tempo []
+  "Dynamically sets tempo in BPM based on song info."
   (->> @state/tempo
        (/ 60)
        (* 1000)))
 
 (defn StartBeatCounter []
-  (let [numberOfBeats (->>
-                       (nth @state/song @state/index)
-                       (last)
-                       (js/parseInt)
-                       (inc))]
-    (if (< @state/beat numberOfBeats)
-      (js/setTimeout #((swap! state/app-state update-in [:beat] inc) (StartBeatCounter)) (Tempo))
-      ((swap! state/app-state assoc-in [:beat] 1) (swap! state/app-state update-in [:index] inc) (StartBeatCounter)))))
+  "Initiates the beat counter and resets the counter to 1 at every new chord. Recursive"
+  (when (= true @state/songPlaying)
+    (let [numberOfBeats (->>
+                         (nth @state/song @state/index)
+                         (last)
+                         (js/parseInt)
+                         (inc))]
+      (if (< @state/beat numberOfBeats)
+        (js/setTimeout #((swap! state/app-state update-in [:beat] inc) (StartBeatCounter)) (Tempo))
+        ((swap! state/app-state assoc-in [:beat] 1) (swap! state/app-state update-in [:index] inc) (StartBeatCounter))))))
 
 (defn BeatCounter []
+  "Displays the beat count at the bottom of the page.  Determined dynamically per song chord."
   @state/beat
   (let [range (->> (nth @state/song @state/index)
                    (last)
@@ -135,10 +139,12 @@
                      :id (rand-int 1000)} e]) range)]))
 
 (defn SongChordFilter [collection thisSong thisIndex]
+  "Displays chords found in the song filtered from complete chord list."
   (let [key (first (nth thisSong thisIndex)) quality (second (nth thisSong thisIndex))]
     (filter #(and (= key (first %)) (= quality (second %))) collection)))
 
 (defn ChordPreviewList []
+  "Displays all chords found in song."
   (let [songChords (->> @state/song
                         (drop 2)
                         (map #(take 2 %))
@@ -153,27 +159,32 @@
      (map chart/ChordChart (SongChordFilter @state/chords @state/song @state/index)))])
 
 (defn OnDeckChord [num upper]
-  @state/beat
+  @state/song
   [:div {:style (OnDeckChordStyle upper)}
    (if (< (+ num @state/index) (count @state/song))
      (map chart/ChordChart (SongChordFilter @state/chords @state/song (+ num @state/index)))
      "")])
-
-(s/fdef OnDeckChord
-        :args (s/cat :num int? :upper string?))
 
 (defn SongTitle []
   [:h1 {:style (SongTitleStyle)}
    @state/songTitle])
 
 (defn StartButton []
-  [:button {:on-click #(do (swap! state/app-state assoc-in [:index] 0) (StartBeatCounter))
+  "Resets state to beginning of song and initiates beat counter."
+  [:button {:on-click #(do
+                         (swap! state/app-state assoc-in [:index] 0)
+                         (swap! state/app-state assoc-in [:beat] 1)
+                         (swap! state/app-state assoc-in [:songPlaying] true)
+                         (StartBeatCounter))
+            :disabled (= true @state/songPlaying)
             :style (StartButtonStyle)} "START"])
 
 (defn TempoButton [operator]
+  "Draws plus or minus button to inc or dec tempo."
   [:button {:onClick #(swap! state/app-state update-in [:tempo] operator 5) :style (TempoButtonStyle)} (if (= operator +) "+" "-")])
 
 (defn TempoDisplay []
+  "Displays current tempo and buttons on top of the page."
   [:div {:style (TempoDisplayStyle)}
    [TempoButton -]
    [:div "BPM: " @state/tempo]
