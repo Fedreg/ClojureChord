@@ -24,25 +24,34 @@
    :border "none"
    :marginTop "6px"})
 
-(def ThemeSelectStyle
-  {:width "200px"
-   :height "25px"
+(defn ThemeSelectStyle []
+  {:position "fixed"
+   :bottom "100px"
+   :right "85px"
+   :width "200px"
    :fontSize "16px"
-   :color "#fff"
-   :paddingLeft "20px"
-   :background "#333"
-   :-webkitAppearance "none"
-   :border "1px solid #fff"})
+   :color (color/ReturnColors :t2)
+   :padding "10px"
+   :border (str "1px solid " (color/ReturnColors :t2))})
 
-(def SongSelectStyle
-  {:width "200px"
-   :height "25px"
+(defn ThemeSelectItemStyle [item]
+  {:margin "10px 20px"
+   :cursor "pointer"
+   :color (if (= item @state/colors) (color/ReturnColors :f3) "")})
+
+(defn SongSelectStyle []
+  {:visibility (if (= @state/currentPage "Song Player") "visible" "hidden")
+   :width "200px"
    :fontSize "16px"
-   :color "#fff"
-   :paddingLeft "20px"
-   :background "#333"
-   :-webkitAppearance "none"
-   :border "1px solid #fff"})
+   :color (color/ReturnColors :t1)
+   :padding "10px 10px 30px"
+   :marginLeft "85px"
+   :border (str "1px solid " (color/ReturnColors :t2))})
+
+(defn SongSelectItemStyle [item]
+  {:marginTop "10px"
+   :cursor "pointer"
+   :color (if (= item @state/songTitle) (color/ReturnColors :f3) "")})
 
 (defn ModalStyle []
   {:position "fixed"
@@ -56,7 +65,7 @@
    :transition "all 0.3s ease"
    :color (color/ReturnColors :t1)
    :backgroundColor (color/ReturnColors :menu)
-   :opacity ".90"})
+   :opacity ".95"})
 
   ;----------------------------------
   ; Components 
@@ -69,14 +78,15 @@
    [:hr {:style (ModalIconHRStyle)}]
    [:hr {:style (ModalIconHRStyle)}]])
 
-  ; Select menu for theme
+(defn SelectNewTheme [theme]
+  (swap! state/app-state assoc-in [:colors] theme)
+  (color/ChangeBackgroundColor))
+
 (defn ThemeSelect []
-  [:select {:style ThemeSelectStyle
-            :on-change #(do
-                          (swap! state/app-state assoc-in [:colors] (-> % .-target .-value))
-                          (color/ChangeBackgroundColor))}
-   [:option {:value "dark"} "Dark"]
-   [:option {:value "light"} "Light"]])
+  [:div {:style (ThemeSelectStyle)}
+   (map #(do [:span {:style (ThemeSelectItemStyle %)
+                     :on-click (fn [%] (SelectNewTheme (-> % .-target .-innerHTML)))}
+              %]) ["Dark" "Light"])])
 
 (defn SongTitles []
   (map #(first %) songs/Songs))
@@ -84,23 +94,28 @@
 (defn GrabSongByTitle [title]
   (first (filter #(= title (first %)) songs/Songs)))
 
+(defn SelectNewSong [title]
+  (songViewer/FormatSong (GrabSongByTitle title))
+  (swap! state/app-state assoc-in [:index] 0)
+  (swap! state/app-state assoc-in [:songPlaying] false))
+
 (defn SongSelect []
-  [:select {:style SongSelectStyle
-            :on-change #(do (songViewer/FormatSong (GrabSongByTitle (-> % .-target .-value)))
-                            (swap! state/app-state assoc-in [:index] 0)
-                            (swap! state/app-state assoc-in [:songPlaying] false))}
-   (map #(do [:option {:id % :value %} %]) (SongTitles))])
+  [:div {:style (SongSelectStyle)}
+   (map #(do [:div {:id %
+                    :style (SongSelectItemStyle %)
+                    :on-click (fn [%] (SelectNewSong (-> % .-target .-innerHTML)))}
+              %]) (SongTitles))])
 
 (defn PageSelector [page]
-  [:div {:style {:margin "20px 50px"
+  [:div {:style {:margin "0 0 10px"
                  :textDecoration "none"
+                 :fontSize "22px"
                  :color (if (= (:currentPage @state/app-state) page) (color/ReturnColors :f3) (color/ReturnColors :t2))}
          :on-click #(swap! state/app-state assoc-in [:currentPage] page)} page])
 
 (defn Modal []
   "Draws the nav menu that opens up from the side.  (Was originally a modal, hence the name.)"
   [:div {:style (ModalStyle)}
-   [:div "Select Theme"]
    [ThemeSelect]
    [:div [PageSelector "Chord Charts"]]
    [:div [PageSelector "Song Player"]]

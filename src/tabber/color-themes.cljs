@@ -1,7 +1,7 @@
 (ns tabber.colorThemes
   (:require [tabber.state :as state]))
 
-(def light
+(def Light
   {:f1 "#5dd7ef"
    :f2 "#a8a7a7"
    :f3 "#5d8eef"
@@ -13,7 +13,7 @@
    :t1 "#000"
    :t2 "#222"})
 
-(def dark
+(def Dark
   {:f1 "#203fcd"
    :f2 "#a8a7a7"
    :f3 "#5d8eef"
@@ -28,8 +28,8 @@
 (defn ReturnColors [value]
   "Sets all the dynamic colors based on theme throughout app."
   (cond
-    (= (:colors @state/app-state) "dark") (get dark value)
-    (= (:colors @state/app-state) "light") (get light value)
+    (= (:colors @state/app-state) "Dark") (get Dark value)
+    (= (:colors @state/app-state) "Light") (get Light value)
     :else ""))
 
 (defn ChangeBackgroundColor []

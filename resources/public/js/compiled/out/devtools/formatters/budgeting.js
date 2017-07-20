@@ -61,16 +61,16 @@ throw (new Error("Assert failed: (not (neg? depth-budget))"));
 var data = cljs.core.second.call(null,object_reference);
 var _ = ((cljs.core.object_QMARK_.call(null,data))?null:(function(){throw (new Error("Assert failed: (object? data)"))})());
 var config = goog.object.get(data,"config");
-var G__38971 = data;
-var target__38342__auto__ = G__38971;
+var G__92543 = data;
+var target__38342__auto__ = G__92543;
 if(cljs.core.truth_(target__38342__auto__)){
 } else {
-throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Assert failed: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1([cljs.core.str.cljs$core$IFn$_invoke$arity$1("unable to locate object path "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(null),cljs.core.str.cljs$core$IFn$_invoke$arity$1(" in "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__38971)].join('')),cljs.core.str.cljs$core$IFn$_invoke$arity$1("\n"),cljs.core.str.cljs$core$IFn$_invoke$arity$1("target__38342__auto__")].join('')));
+throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1("Assert failed: "),cljs.core.str.cljs$core$IFn$_invoke$arity$1([cljs.core.str.cljs$core$IFn$_invoke$arity$1("unable to locate object path "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(null),cljs.core.str.cljs$core$IFn$_invoke$arity$1(" in "),cljs.core.str.cljs$core$IFn$_invoke$arity$1(G__92543)].join('')),cljs.core.str.cljs$core$IFn$_invoke$arity$1("\n"),cljs.core.str.cljs$core$IFn$_invoke$arity$1("target__38342__auto__")].join('')));
 }
 
 goog.object.set(target__38342__auto__,cljs.core.last.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, ["config"], null)),devtools.formatters.state.set_depth_budget.call(null,config,depth_budget));
 
-return G__38971;
+return G__92543;
 });
 devtools.formatters.budgeting.distribute_budget_BANG_ = (function devtools$formatters$budgeting$distribute_budget_BANG_(json_ml,depth_budget){
 if(!((depth_budget < (0)))){
@@ -79,55 +79,55 @@ throw (new Error("Assert failed: (not (neg? depth-budget))"));
 }
 
 if(cljs.core.array_QMARK_.call(null,json_ml)){
-var new_depth_budget_38976 = (depth_budget - (1));
+var new_depth_budget_92548 = (depth_budget - (1));
 if(cljs.core.truth_(devtools.formatters.budgeting.object_reference_QMARK_.call(null,json_ml))){
-devtools.formatters.budgeting.transfer_remaining_depth_budget_BANG_.call(null,json_ml,new_depth_budget_38976);
+devtools.formatters.budgeting.transfer_remaining_depth_budget_BANG_.call(null,json_ml,new_depth_budget_92548);
 } else {
-var seq__38972_38977 = cljs.core.seq.call(null,json_ml);
-var chunk__38973_38978 = null;
-var count__38974_38979 = (0);
-var i__38975_38980 = (0);
+var seq__92544_92549 = cljs.core.seq.call(null,json_ml);
+var chunk__92545_92550 = null;
+var count__92546_92551 = (0);
+var i__92547_92552 = (0);
 while(true){
-if((i__38975_38980 < count__38974_38979)){
-var item_38981 = cljs.core._nth.call(null,chunk__38973_38978,i__38975_38980);
-devtools.formatters.budgeting.distribute_budget_BANG_.call(null,item_38981,new_depth_budget_38976);
+if((i__92547_92552 < count__92546_92551)){
+var item_92553 = cljs.core._nth.call(null,chunk__92545_92550,i__92547_92552);
+devtools.formatters.budgeting.distribute_budget_BANG_.call(null,item_92553,new_depth_budget_92548);
 
-var G__38982 = seq__38972_38977;
-var G__38983 = chunk__38973_38978;
-var G__38984 = count__38974_38979;
-var G__38985 = (i__38975_38980 + (1));
-seq__38972_38977 = G__38982;
-chunk__38973_38978 = G__38983;
-count__38974_38979 = G__38984;
-i__38975_38980 = G__38985;
+var G__92554 = seq__92544_92549;
+var G__92555 = chunk__92545_92550;
+var G__92556 = count__92546_92551;
+var G__92557 = (i__92547_92552 + (1));
+seq__92544_92549 = G__92554;
+chunk__92545_92550 = G__92555;
+count__92546_92551 = G__92556;
+i__92547_92552 = G__92557;
 continue;
 } else {
-var temp__5278__auto___38986 = cljs.core.seq.call(null,seq__38972_38977);
-if(temp__5278__auto___38986){
-var seq__38972_38987__$1 = temp__5278__auto___38986;
-if(cljs.core.chunked_seq_QMARK_.call(null,seq__38972_38987__$1)){
-var c__29481__auto___38988 = cljs.core.chunk_first.call(null,seq__38972_38987__$1);
-var G__38989 = cljs.core.chunk_rest.call(null,seq__38972_38987__$1);
-var G__38990 = c__29481__auto___38988;
-var G__38991 = cljs.core.count.call(null,c__29481__auto___38988);
-var G__38992 = (0);
-seq__38972_38977 = G__38989;
-chunk__38973_38978 = G__38990;
-count__38974_38979 = G__38991;
-i__38975_38980 = G__38992;
+var temp__5278__auto___92558 = cljs.core.seq.call(null,seq__92544_92549);
+if(temp__5278__auto___92558){
+var seq__92544_92559__$1 = temp__5278__auto___92558;
+if(cljs.core.chunked_seq_QMARK_.call(null,seq__92544_92559__$1)){
+var c__29481__auto___92560 = cljs.core.chunk_first.call(null,seq__92544_92559__$1);
+var G__92561 = cljs.core.chunk_rest.call(null,seq__92544_92559__$1);
+var G__92562 = c__29481__auto___92560;
+var G__92563 = cljs.core.count.call(null,c__29481__auto___92560);
+var G__92564 = (0);
+seq__92544_92549 = G__92561;
+chunk__92545_92550 = G__92562;
+count__92546_92551 = G__92563;
+i__92547_92552 = G__92564;
 continue;
 } else {
-var item_38993 = cljs.core.first.call(null,seq__38972_38987__$1);
-devtools.formatters.budgeting.distribute_budget_BANG_.call(null,item_38993,new_depth_budget_38976);
+var item_92565 = cljs.core.first.call(null,seq__92544_92559__$1);
+devtools.formatters.budgeting.distribute_budget_BANG_.call(null,item_92565,new_depth_budget_92548);
 
-var G__38994 = cljs.core.next.call(null,seq__38972_38987__$1);
-var G__38995 = null;
-var G__38996 = (0);
-var G__38997 = (0);
-seq__38972_38977 = G__38994;
-chunk__38973_38978 = G__38995;
-count__38974_38979 = G__38996;
-i__38975_38980 = G__38997;
+var G__92566 = cljs.core.next.call(null,seq__92544_92559__$1);
+var G__92567 = null;
+var G__92568 = (0);
+var G__92569 = (0);
+seq__92544_92549 = G__92566;
+chunk__92545_92550 = G__92567;
+count__92546_92551 = G__92568;
+i__92547_92552 = G__92569;
 continue;
 }
 } else {
@@ -177,4 +177,4 @@ return json_ml;
 }
 });
 
-//# sourceMappingURL=budgeting.js.map?rel=1500449678324
+//# sourceMappingURL=budgeting.js.map?rel=1500526714130

@@ -120,9 +120,9 @@ return cljs.spec.alpha.valid_QMARK_.call(null,new cljs.core.Keyword("tabber.chor
 return and__28557__auto__;
 }
 })())){
-var vec__31617 = [cljs.core.str.cljs$core$IFn$_invoke$arity$1(notes),cljs.core.str.cljs$core$IFn$_invoke$arity$1((0))].join('');
-var fret = cljs.core.nth.call(null,vec__31617,(0),null);
-var finger = cljs.core.nth.call(null,vec__31617,(1),null);
+var vec__88316 = [cljs.core.str.cljs$core$IFn$_invoke$arity$1(notes),cljs.core.str.cljs$core$IFn$_invoke$arity$1((0))].join('');
+var fret = cljs.core.nth.call(null,vec__88316,(0),null);
+var finger = cljs.core.nth.call(null,vec__88316,(1),null);
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),tabber.chordChart.FretFingerMarkerStyle.call(null,string,fret,finger)], null),finger], null);
 } else {
 return null;
@@ -142,16 +142,16 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
 });
 tabber.chordChart.ChordChart = (function tabber$chordChart$ChordChart(chord){
 
-var vec__31620 = chord;
-var chordName = cljs.core.nth.call(null,vec__31620,(0),null);
-var quality = cljs.core.nth.call(null,vec__31620,(1),null);
-var e6 = cljs.core.nth.call(null,vec__31620,(2),null);
-var a = cljs.core.nth.call(null,vec__31620,(3),null);
-var d = cljs.core.nth.call(null,vec__31620,(4),null);
-var g = cljs.core.nth.call(null,vec__31620,(5),null);
-var b = cljs.core.nth.call(null,vec__31620,(6),null);
-var e = cljs.core.nth.call(null,vec__31620,(7),null);
-var bar = cljs.core.nth.call(null,vec__31620,(8),null);
+var vec__88319 = chord;
+var chordName = cljs.core.nth.call(null,vec__88319,(0),null);
+var quality = cljs.core.nth.call(null,vec__88319,(1),null);
+var e6 = cljs.core.nth.call(null,vec__88319,(2),null);
+var a = cljs.core.nth.call(null,vec__88319,(3),null);
+var d = cljs.core.nth.call(null,vec__88319,(4),null);
+var g = cljs.core.nth.call(null,vec__88319,(5),null);
+var b = cljs.core.nth.call(null,vec__88319,(6),null);
+var e = cljs.core.nth.call(null,vec__88319,(7),null);
+var bar = cljs.core.nth.call(null,vec__88319,(8),null);
 if(cljs.core.truth_((function (){var and__28557__auto__ = cljs.spec.alpha.valid_QMARK_.call(null,new cljs.core.Keyword("tabber.chordChart","chordName","tabber.chordChart/chordName",1269231719),chordName);
 if(cljs.core.truth_(and__28557__auto__)){
 var and__28557__auto____$1 = cljs.spec.alpha.valid_QMARK_.call(null,new cljs.core.Keyword("tabber.chordChart","quality","tabber.chordChart/quality",-555928243),quality);
@@ -219,17 +219,17 @@ if((cljs.core._EQ_.call(null,cljs.core.deref.call(null,tabber.state.musKey),"All
 return collection;
 } else {
 if(cljs.core._EQ_.call(null,cljs.core.deref.call(null,tabber.state.musKey),"All")){
-return cljs.core.filter.call(null,(function (p1__31623_SHARP_){
-return cljs.core._EQ_.call(null,cljs.core.second.call(null,p1__31623_SHARP_),cljs.core.deref.call(null,tabber.state.quality));
+return cljs.core.filter.call(null,(function (p1__88322_SHARP_){
+return cljs.core._EQ_.call(null,cljs.core.second.call(null,p1__88322_SHARP_),cljs.core.deref.call(null,tabber.state.quality));
 }),collection);
 } else {
 if(cljs.core._EQ_.call(null,cljs.core.deref.call(null,tabber.state.quality),"All")){
-return cljs.core.filter.call(null,(function (p1__31624_SHARP_){
-return cljs.core._EQ_.call(null,cljs.core.first.call(null,p1__31624_SHARP_),cljs.core.deref.call(null,tabber.state.musKey));
+return cljs.core.filter.call(null,(function (p1__88323_SHARP_){
+return cljs.core._EQ_.call(null,cljs.core.first.call(null,p1__88323_SHARP_),cljs.core.deref.call(null,tabber.state.musKey));
 }),collection);
 } else {
-return cljs.core.filter.call(null,(function (p1__31625_SHARP_){
-return (cljs.core._EQ_.call(null,cljs.core.first.call(null,p1__31625_SHARP_),cljs.core.deref.call(null,tabber.state.musKey))) && (cljs.core._EQ_.call(null,cljs.core.second.call(null,p1__31625_SHARP_),cljs.core.deref.call(null,tabber.state.quality)));
+return cljs.core.filter.call(null,(function (p1__88324_SHARP_){
+return (cljs.core._EQ_.call(null,cljs.core.first.call(null,p1__88324_SHARP_),cljs.core.deref.call(null,tabber.state.musKey))) && (cljs.core._EQ_.call(null,cljs.core.second.call(null,p1__88324_SHARP_),cljs.core.deref.call(null,tabber.state.quality)));
 }),collection);
 
 }
@@ -240,4 +240,4 @@ tabber.chordChart.ChordChartPage = (function tabber$chordChart$ChordChartPage(){
 return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),cljs.core.map.call(null,tabber.chordChart.KeyButton,tabber.chordChart.keyList),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),cljs.core.map.call(null,tabber.chordChart.QualityButton,tabber.chordChart.qualityList)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"display","display",242065432),"flex",new cljs.core.Keyword(null,"justifyContent","justifyContent",885406515),"center",new cljs.core.Keyword(null,"flexWrap","flexWrap",-1972563518),"wrap",new cljs.core.Keyword(null,"marginTop","marginTop",-1403015220),"50px"], null)], null),cljs.core.map.call(null,tabber.chordChart.ChordChart,tabber.chordChart.KeyFilter.call(null,cljs.core.deref.call(null,tabber.state.chords)))], null)], null);
 });
 
-//# sourceMappingURL=chordChart.js.map?rel=1500449440119
+//# sourceMappingURL=chordChart.js.map?rel=1500526691701

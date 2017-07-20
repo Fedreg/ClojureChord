@@ -20,7 +20,7 @@
 
 (defonce app-state (r/atom {:beat 1
                             :chords chords/chordList
-                            :colors "dark"
+                            :colors "Dark"
                             :currentPage "Chord Charts"
                             :index 0
                             :key "A"
@@ -38,6 +38,7 @@
 (def beat (r/cursor app-state [:beat]))
 (def chords (r/cursor app-state [:chords]))
 (def colors (r/cursor app-state [:colors]))
+(def currentPage (r/cursor app-state [:currentPage]))
 (def index (r/cursor app-state [:index]))
 (def musKey (r/cursor app-state [:key]))
 (def quality (r/cursor app-state [:quality]))

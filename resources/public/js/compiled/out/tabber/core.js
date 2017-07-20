@@ -15,4 +15,4 @@ return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMP
 });
 reagent.core.render_component.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tabber.core.Chords], null),document.getElementById("app"));
 
-//# sourceMappingURL=core.js.map?rel=1500449672380
+//# sourceMappingURL=core.js.map?rel=1500526711434

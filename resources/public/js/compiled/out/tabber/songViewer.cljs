@@ -25,21 +25,22 @@
    :fontSize "80px"})
 
 (def CurrentChordStyle
-  {:transform "scale(1.5)"
+  {:zoom "1.5"
    :willChange "transform"
-   :width "1vw"
+   :width "320px"
+   :height "600px"
    :position "fixed"
-   :top "200px"
-   :left "calc(50% - 250px)"})
+   :top "120px"
+   :left "calc(50% - 160px)"})
 
 (defn GetReadyStyle []
   {:width "200px"
-   :margin "70px 0 0 70px"
+   :margin "70px 0 0 60px"
    :fontSize "30px"
    :color (color/ReturnColors :t1)})
 
 (defn OnDeckChordStyle [upper]
-  {:transform "scale(0.9)"
+  {:transform "scale(0.8)"
    :position "fixed"
    :top upper
    :right "20px"})
@@ -85,6 +86,7 @@
    :width "200px"
    :height "50px"
    :color  (color/ReturnColors :t2)
+   :zIndex "2"
    :justifyContent "space-between"
    :fontSize "30px"})
 
@@ -191,7 +193,7 @@
    [TempoButton +]])
 
 (defn SongPage []
-  [:div {:style {:position "relative"}}
+  [:div {:style {:position "relative" :display "flex" :align-items "center" :flexDirection "column"}}
    [SongTitle]
    [TempoDisplay]
    [CurrentChord]
