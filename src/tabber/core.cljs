@@ -2,7 +2,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [clojure.string :as str]
             [tabber.chords :as chords]
-            [tabber.modal :as modal]
+            [tabber.nav :as nav]
             [tabber.colorThemes :as color]
             [tabber.chordChart :as chart]
             [tabber.songViewer :as song]
@@ -10,8 +10,8 @@
 
 (defn Chords []
   [:div {:style {:marginTop "100px" :textAlign "center"} :id "chords"}
-   [modal/ModalIcon]
-   [modal/Modal]
+   [nav/NavIcon]
+   [nav/Nav]
    (cond
      (= "Chord Charts" (:currentPage @state/app-state)) (chart/ChordChartPage)
      (= "Song Player" (:currentPage @state/app-state)) (song/SongPage)

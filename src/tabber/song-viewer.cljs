@@ -97,15 +97,15 @@
 (defn FormatSong [songInfo]
   "Converts song data from [string int string] to list of chords, title, & tempo"
   (if (s/valid? ::songInfo songInfo)
-    (do (swap! state/app-state assoc-in [:songTitle] (first songInfo))
-        (swap! state/app-state assoc-in [:tempo] (second songInfo))
+    (do (state/UpdateState :SwitchSongTitle (first songInfo))
+        (state/UpdateState :NewTempo (second songInfo))
         (->> songInfo
              (drop 2)
              (mapcat #(str/split % #" "))
              (filter #(not (str/blank? %)))
              (map #(str/split % #"/"))
              (cons ["X" "X" "4"])
-             (swap! state/app-state assoc-in [:song])))
+             (state/UpdateState :SwitchSong)))
     (js/alert (str (first songInfo) " is not properly formatted!"))))
 
 (defn Tempo []
@@ -123,8 +123,8 @@
                          (js/parseInt)
                          (inc))]
       (if (< @state/beat numberOfBeats)
-        (js/setTimeout #((swap! state/app-state update-in [:beat] inc) (StartBeatCounter)) (Tempo))
-        ((swap! state/app-state assoc-in [:beat] 1) (swap! state/app-state update-in [:index] inc) (StartBeatCounter))))))
+        (js/setTimeout #((state/UpdateState :IncBeat) (StartBeatCounter)) (Tempo))
+        ((state/UpdateState :ResetBeat) (state/UpdateState :IncIndex) (StartBeatCounter))))))
 
 (defn BeatCounter []
   "Displays the beat count at the bottom of the page.  Determined dynamically per song chord."
@@ -174,16 +174,16 @@
 (defn StartButton []
   "Resets state to beginning of song and initiates beat counter."
   [:button {:on-click #(do
-                         (swap! state/app-state assoc-in [:index] 0)
-                         (swap! state/app-state assoc-in [:beat] 1)
-                         (swap! state/app-state assoc-in [:songPlaying] true)
+                         (state/UpdateState :ResetIndex)
+                         (state/UpdateState :ResetBeat)
+                         (state/UpdateState :PlaySong true)
                          (StartBeatCounter))
             :disabled (= true @state/songPlaying)
             :style (StartButtonStyle)} "START"])
 
 (defn TempoButton [operator]
   "Draws plus or minus button to inc or dec tempo."
-  [:button {:onClick #(swap! state/app-state update-in [:tempo] operator 5) :style (TempoButtonStyle)} (if (= operator +) "+" "-")])
+  [:button {:onClick #(state/UpdateState :AdjustTempo operator) :style (TempoButtonStyle)} (if (= operator +) "+" "-")])
 
 (defn TempoDisplay []
   "Displays current tempo and buttons on top of the page."

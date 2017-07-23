@@ -1,4 +1,4 @@
-(ns tabber.modal
+(ns tabber.nav
   (:require [tabber.state :as state]
             [tabber.songs :as songs]
             [tabber.songViewer :as songViewer]
@@ -8,17 +8,17 @@
   ; Component Styles
   ;-------------------------------
 
-(defn ModalIconStyle []
+(defn NavIconStyle []
   {:position "fixed"
    :top "25px"
    :right "25px"
    :width "20px"
-   :transform (if (= true (:showModal @state/app-state)) "translateX(-320px) rotate(270deg)" "translateX(0) rotate(0)")
+   :transform (if (= true @state/showNav) "translateX(-320px) rotate(270deg)" "translateX(0) rotate(0)")
    :zIndex 1001
    :transition "all 0.3s ease"
    :cursor "pointer"})
 
-(defn ModalIconHRStyle []
+(defn NavIconHRStyle []
   {:height "1px"
    :backgroundColor (color/ReturnColors :t1)
    :border "none"
@@ -53,33 +53,32 @@
    :cursor "pointer"
    :color (if (= item @state/songTitle) (color/ReturnColors :f3) "")})
 
-(defn ModalStyle []
+(defn NavStyle []
   {:position "fixed"
    :top "0"
    :right "0"
-   :transform (if (= true (:showModal @state/app-state)) "translateX(0)" "translateX(420px)")
+   :transform (if (= true @state/showNav) "translateX(0)" "translateX(420px)")
    :width "400px"
    :height "100vh"
    :paddingTop "75px"
    :zIndex "1000"
    :transition "all 0.3s ease"
    :color (color/ReturnColors :t1)
-   :backgroundColor (color/ReturnColors :menu)
-   :opacity ".95"})
+   :backgroundColor (color/ReturnColors :menu)})
 
   ;----------------------------------
   ; Components 
   ;----------------------------------
 
-(defn ModalIcon []
-  [:div {:style (ModalIconStyle)
-         :on-click #(swap! state/app-state assoc-in [:showModal] (not (:showModal @state/app-state)))}
-   [:hr {:style (ModalIconHRStyle)}]
-   [:hr {:style (ModalIconHRStyle)}]
-   [:hr {:style (ModalIconHRStyle)}]])
+(defn NavIcon []
+  [:div {:style (NavIconStyle)
+         :on-click #(state/UpdateState :ToggleNav)}
+   [:hr {:style (NavIconHRStyle)}]
+   [:hr {:style (NavIconHRStyle)}]
+   [:hr {:style (NavIconHRStyle)}]])
 
 (defn SelectNewTheme [theme]
-  (swap! state/app-state assoc-in [:colors] theme)
+  (state/UpdateState :SwitchTheme theme)
   (color/ChangeBackgroundColor))
 
 (defn ThemeSelect []
@@ -96,8 +95,8 @@
 
 (defn SelectNewSong [title]
   (songViewer/FormatSong (GrabSongByTitle title))
-  (swap! state/app-state assoc-in [:index] 0)
-  (swap! state/app-state assoc-in [:songPlaying] false))
+  (state/UpdateState :ResetIndex)
+  (state/UpdateState :PlaySong false))
 
 (defn SongSelect []
   [:div {:style (SongSelectStyle)}
@@ -111,11 +110,11 @@
                  :textDecoration "none"
                  :fontSize "22px"
                  :color (if (= (:currentPage @state/app-state) page) (color/ReturnColors :f3) (color/ReturnColors :t2))}
-         :on-click #(swap! state/app-state assoc-in [:currentPage] page)} page])
+         :on-click #(state/UpdateState :SwitchPage page)} page])
 
-(defn Modal []
-  "Draws the nav menu that opens up from the side.  (Was originally a modal, hence the name.)"
-  [:div {:style (ModalStyle)}
+(defn Nav []
+  "Draws the nav menu that opens up from the side.  (Was originally a Nav, hence the name.)"
+  [:div {:style (NavStyle)}
    [ThemeSelect]
    [:div [PageSelector "Chord Charts"]]
    [:div [PageSelector "Song Player"]]

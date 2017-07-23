@@ -187,12 +187,12 @@
 (defn KeyButton [key]
   "The button that select key.  i.e. A B C D etc."
   [:button {:style (KeyButtonStyle key)
-            :on-click (fn [e] (swap! state/app-state assoc-in [:key] key))} key])
+            :on-click #(state/UpdateState :SwitchKey key)} key])
 
 (defn QualityButton [quality]
   "The buttons that select chord type. i.e. M m 6 7 etc."
   [:button {:style (QualityButtonStyle quality)
-            :on-click (fn [e] (swap! state/app-state assoc-in [:quality] quality))} quality])
+            :on-click #(state/UpdateState :SwitchQuality quality)} quality])
 
 (def keyList
   ["All" "A" "Ab" "B" "Bb" "C" "C#" "D" "Db" "E" "Eb" "F" "F#" "G" "G#"])
