@@ -52,30 +52,30 @@
 ; Update
 ;-----------------------------------------------------
 
-(defn Upd [a b c]
-  "Pattern match over swap fn to reduce boilerplate"
-  (swap! app-state a [b] c))
+; (defn Upd [a b c]
+;   "Pattern match over swap fn to reduce boilerplate"
+;   (swap! app-state a [b] c))
 
 (defn UpdateState
   "Main update function.  All state changes go through here."
   ([msg]
    (case msg
-     :IncBeat (Upd update-in :beat inc)
-     :ResetBeat (Upd assoc-in :beat 1)
-     :IncIndex (Upd update-in :index inc)
-     :ResetIndex (Upd assoc-in :index 0)
-     :ToggleNav (Upd assoc-in :showNav (not @showNav))
+     :IncBeat (swap! app-state update-in [:beat] inc)
+     :ResetBeat (swap! app-state assoc-in [:beat] 1)
+     :IncIndex (swap! app-state update-in [:index] inc)
+     :ResetIndex (swap! app-state assoc-in [:index] 0)
+     :ToggleNav (swap! app-state assoc-in [:showNav] (not @showNav))
      "Error: No Change to State Atom (UpdateState/1)"))
   ([msg params]
    (print msg params)
    (case msg
-     :SwitchKey (Upd assoc-in :key params)
-     :SwitchQuality (Upd assoc-in :quality params)
-     :SwitchTheme (Upd assoc-in :colors params)
-     :SwitchPage (Upd assoc-in :currentPage params)
-     :PlaySong (Upd assoc-in :songPlaying params)
-     :SwitchSong (Upd assoc-in :song params)
-     :SwitchSongTitle (Upd assoc-in :songTitle params)
-     :NewTempo (Upd assoc-in :tempo params)
-     :AdjustTempo (Upd assoc-in :tempo (params @tempo 5))
+     :SwitchKey (swap! app-state assoc-in [:key] params)
+     :SwitchQuality (swap! app-state assoc-in [:quality] params)
+     :SwitchTheme (swap! app-state assoc-in [:colors] params)
+     :SwitchPage (swap! app-state assoc-in [:currentPage] params)
+     :PlaySong (swap! app-state assoc-in [:songPlaying] params)
+     :SwitchSong (swap! app-state assoc-in [:song] params)
+     :SwitchSongTitle (swap! app-state assoc-in [:songTitle] params)
+     :NewTempo (swap! app-state assoc-in [:tempo] params)
+     :AdjustTempo (swap! app-state assoc-in [:tempo] (params @tempo 5))
      "Error: No Change to State Atom (UpdateState/2")))

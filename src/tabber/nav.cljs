@@ -82,30 +82,37 @@
   (color/ChangeBackgroundColor))
 
 (defn ThemeSelect []
+  "Chooses dark or light theme."
   [:div {:style (ThemeSelectStyle)}
    (map #(do [:span {:style (ThemeSelectItemStyle %)
-                     :on-click (fn [%] (SelectNewTheme (-> % .-target .-innerHTML)))}
+                     :on-click (fn [%] (SelectNewTheme (-> % .-target .-innerHTML)))
+                     :key %}
               %]) ["Dark" "Light"])])
 
 (defn SongTitles []
+  "Get titles of all songs in memeory"
   (map #(first %) songs/Songs))
 
 (defn GrabSongByTitle [title]
+  "Gets the requested song by title to be formatted." 
   (first (filter #(= title (first %)) songs/Songs)))
 
 (defn SelectNewSong [title]
+  "When new song in selected this func will trigger formatting, reset the index, and stop current song."
   (songViewer/FormatSong (GrabSongByTitle title))
   (state/UpdateState :ResetIndex)
   (state/UpdateState :PlaySong false))
 
 (defn SongSelect []
-  [:div {:style (SongSelectStyle)}
-   (map #(do [:div {:id %
+  "Selects current song."
+  [:div {:style (SongSelectStyle) :key "ss"}
+   (map #(do [:div {:key %
                     :style (SongSelectItemStyle %)
                     :on-click (fn [%] (SelectNewSong (-> % .-target .-innerHTML)))}
               %]) (SongTitles))])
 
 (defn PageSelector [page]
+  "Selects which page to navigate to.  TODO: Proper CS routing."
   [:div {:style {:margin "0 0 10px"
                  :textDecoration "none"
                  :fontSize "22px"

@@ -169,7 +169,7 @@
            (s/valid? ::note b)
            (s/valid? ::note e)
            (s/valid? ::bar bar))
-      [:div {:style (ChordChartStyle) :id (rand-int 1000)}
+      [:div {:style (ChordChartStyle) :key (str chordName (rand-int 1000))}
        [:div {:style (ChordChartNameStyle)} (str chordName quality)]
        [HorizontalStrings]
        [Nut]
@@ -187,11 +187,13 @@
 (defn KeyButton [key]
   "The button that select key.  i.e. A B C D etc."
   [:button {:style (KeyButtonStyle key)
+            :key (str key (rand-int 1000))
             :on-click #(state/UpdateState :SwitchKey key)} key])
 
 (defn QualityButton [quality]
   "The buttons that select chord type. i.e. M m 6 7 etc."
   [:button {:style (QualityButtonStyle quality)
+            :key quality
             :on-click #(state/UpdateState :SwitchQuality quality)} quality])
 
 (def keyList

@@ -33,4 +33,5 @@
     :else ""))
 
 (defn ChangeBackgroundColor []
+  "Changes the color of the main html div which the cljs app is embeded in."
   (set! js/document.body.style.backgroundColor (ReturnColors :bcgrnd)))
