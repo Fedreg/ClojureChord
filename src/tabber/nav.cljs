@@ -94,7 +94,7 @@
   (map #(first %) songs/Songs))
 
 (defn GrabSongByTitle [title]
-  "Gets the requested song by title to be formatted." 
+  "Gets the requested song by title to be formatted."
   (first (filter #(= title (first %)) songs/Songs)))
 
 (defn SelectNewSong [title]

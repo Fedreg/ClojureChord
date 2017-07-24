@@ -138,7 +138,9 @@
   "Draws each dot on the chord chart."
   (when (and (s/valid? ::string string) (s/valid? ::note notes))
     (let [[fret finger] (str notes 0)]
-      [:div {:style (FretFingerMarkerStyle string fret finger)} finger])))
+      [:div
+       {:style (FretFingerMarkerStyle string fret finger)}
+       finger])))
 
 (defn HorizontalStrings []
   "Draws the 'strings' for the chord chart."
@@ -182,7 +184,8 @@
        [FretFingerMarker :g g]
        [FretFingerMarker :b b]
        [FretFingerMarker :e e]
-       [:div {:style (ChordChartBarStyle)} (if (not (= nil bar)) (str "bar " bar) "")]])))
+       [:div {:style (ChordChartBarStyle)}
+        (if (not (= nil bar)) (str "bar " bar) "")]])))
 
 (defn KeyButton [key]
   "The button that select key.  i.e. A B C D etc."

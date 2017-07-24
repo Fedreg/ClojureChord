@@ -138,7 +138,7 @@
      (map
       (fn [e] [:div {:style {:paddingLeft "20px"
                              :color (if (= e @state/beat) (color/ReturnColors :f1) (color/ReturnColors :t2))}
-                     :id (rand-int 1000)} e]) range)]))
+                     :key (rand-int 1000)} e]) range)]))
 
 (defn SongChordFilter [collection thisSong thisIndex]
   "Displays chords found in the song filtered from complete chord list."
@@ -152,7 +152,8 @@
                         (map #(take 2 %))
                         (distinct)
                         (into #{}))]
-    [:div {:style ChordPreviewListStyle} (map chart/ChordChart (filter #(contains? songChords (take 2 %)) @state/chords))]))
+    [:div {:style ChordPreviewListStyle} 
+      (map chart/ChordChart (filter #(contains? songChords (take 2 %)) @state/chords))]))
 
 (defn CurrentChord []
   [:div {:style CurrentChordStyle}
